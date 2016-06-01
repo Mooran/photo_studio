@@ -53,23 +53,44 @@
             <div class="small-5 columns clear_padding">
               <h4><img src="img/03.png" />在线选片</h4>
             </div>
-            <div class="small-12 medium-7 columns right clear_padding">
+            <div class="small-7 medium-7 columns right clear_padding">
               <ul class="inline-list">
-                <li><a href="#" id="save">保存</a></li>
                 <li><a href="#" id="choosed">查看已选</a></li>
                 <li><a href="#" id="unchoose">查看未选</a></li>
-                <li><a href="#" id="allchoose">全选</a></li>
-                <li><a href="#" id="inverse">反选</a></li>
+                <!-- <li><a href="#" id="allchoose">全选</a></li> -->
+                <!-- <li><a href="#" id="inverse">反选</a></li> -->
               </ul>
             </div>
           </header>
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
-              <li class="small-6 medium-3 large-2"><a href="img/02.jpg"><img src="img/02.jpg"  /></a><p class="text-center">001.jpg</p><input type="checkbox" value="1" name="pic_id" /></li>
-              <li class="small-6 medium-3 large-2"><a href="img/01.jpg"><img src="img/02.jpg"  /></a><p class="text-center">002.jpg</p><input type="checkbox" value="2" name="pic_id" /></li>
-              <li class="small-6 medium-3 large-2"><a href="img/02.jpg"><img src="img/02.jpg"  /></a><p class="text-center">003.jpg</p><input type="checkbox" value="3" name="pic_id" /></li>
-              <li class="small-6 medium-3 large-2"><a href="img/01.jpg"><img src="img/02.jpg"  /></a><p class="text-center">004.jpg</p><input type="checkbox" value="4" name="pic_id" /></li>
+              <li class="small-6 medium-3 large-2"><a href="img/02.jpg"><img src="img/02.jpg"  /></a><p class="text-left"><span data-name="001.jpg">001.jpg</span><a href="#" class="add_pic right" data-reveal-id="myModal">添加</a></p></li>
+              <li class="small-6 medium-3 large-2"><a href="img/02.jpg"><img src="img/02.jpg"  /></a><p class="text-left"><span data-name="002.jpg">002.jpg</span><a href="#" class="add_pic right" data-reveal-id="myModal">添加</a></p></li>
+              <li class="small-6 medium-3 large-2"><a href="img/02.jpg"><img src="img/02.jpg"  /></a><p class="text-left"><span data-name="003.jpg">003.jpg</span><a href="#" class="add_pic right" data-reveal-id="myModal">添加</a></p></li>
+              <li class="small-6 medium-3 large-2"><a href="img/02.jpg"><img src="img/02.jpg"  /></a><p class="text-left"><span data-name="004.jpg">004.jpg</span><a href="#" class="add_pic right" data-reveal-id="myModal">添加</a></p></li>
             </ul>
+            <div id="myModal" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+              <h4 id="modalTitle">你选择的图片有：</h4>
+              <div class="row">
+                <div class="columns small-6 medium-7"><span id="choose_pic_name"></span></div>
+                <div class="columns small-6 medium-2"><input type="number" class="right" name="pic_number" min="0" value="0" id="pic_number" /></div>
+              </div>
+              <p><a href="#" class="button right" id="sure">确定</a></p>
+              <p>  <a class="close-reveal-modal" aria-label="Close">×</a>
+              </p>
+            </div>
+            <div id="saveModal" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+              <h4 id="modalTitle">你选择的图片有：</h4>
+              <div id="total_pic">
+                <div class="row">
+                  <div class="columns small-6 medium-7"><span></span></div>
+                  <div class="columns small-6 medium-2"><input type="number" class="right" name="pic_number" min="0" value="0" /></div>
+                </div>
+              </div>
+              <p><a href="#" class="button right" id="submit">提交</a></p>
+              <p>  <a class="close-reveal-modal" aria-label="Close">×</a>
+              </p>
+            </div>
           </section>
         </div>
       </div>
@@ -77,35 +98,14 @@
     </div>
   </div>
 
+    <a href="#" class="button expand" id="save">保存</a>
+
+
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
       $(document).foundation();
-      $("input").on("click",function(){
-        event.stopPropagation();
-      });
-      $("#choosed").on("click",function(){
-        $(".clearing-thumbs").find("li").hide();
-        $("input:checked").parent().show();
-      });
-      $("#unchoose").on("click",function(){
-        $(".clearing-thumbs").find("li").show();
-        $("input:checked").parent().hide();
-      });
-      $("#allchoose").on("click",function(){
-        $(".clearing-thumbs").find("li").show();
-        $(".clearing-thumbs li").find("input").prop("checked",true);
-      });
-      $("#inverse").on("click",function(){
-        $(".clearing-thumbs li").find("input").each(function(){
-          var checked = $(this).prop("checked");
-          if(checked){
-            $(this).prop("checked",false);
-          }else{
-            $(this).prop("checked",true);
-          }
-        })
-      });
     </script>
+    <script src="js/base.js"></script>
   </body>
 </html>

@@ -15,10 +15,17 @@ ul{margin-bottom: 0;line-height: 3.6}
 .top-bar-section li:not(.has-form) a:not(.button){background: #1450B8}
 .clearing-thumbs li{position: relative;padding: 5px;border: solid 1px #ededed}
 .clearing-thumbs input{position: absolute;right: 10px;top: 10px;width: 20px;height: 20px;}
+.add_pic{font-size: 15px;padding: 0 10px;}
 .clearing-thumbs li:hover{box-shadow: 1px 1px 8px #999}
 .top-bar.expanded .title-area{background: #1450B8}
 .dropdown li>a:hover{background: #1450B8}
 .pic_box .th img{height: 220px;}
+.reveal-modal span{font-size: 25px;}
+.button{padding: 10px 40px;margin-top: 20px;margin-bottom: 0;}
+#save{position: fixed;bottom: 20px;}
 @media only screen and (max-width: 40.063em){
 	.pic_box .th img{height: 120px;}
+}
+@media only screen and (max-width: 40em){
+	.reveal-modal, dialog{min-height: auto}
 }
