@@ -34,13 +34,18 @@ pic = {
 		//弹窗打开之前的操作
 		$(".pic_box").on('open.fndtn.reveal', '[data-reveal]', function () {
 			var modal = $(this);
-			modal.find("#choose_pic_name").html(pic_name);
+			//modal.find("span").html(pic_name);
 		});
 		//添加图片数量是点击确定，将数据暂存本地
 	    $("#sure").on("click",function(){
-	    	var nam = $(this).parents("#myModal").find("#choose_pic_name").html();
-	    	var num = $(this).parents("#myModal").find("#pic_number").val();
-	    	native_data[nam] = num;
+	    	var nam_list = $(this).parents("#myModal").find("span");
+	    	var num_list = $(this).parents("#myModal").find("input");
+            for(var i=0;i<nam_list.length;i++){
+                nam = $(nam_list[i]).html();
+                num = $(num_list[i]).val();
+                native_data[nam] = num;
+            }
+	    	
 	    	$(".close-reveal-modal").trigger("click");
 	    });
 	    //点击添加按钮触发的时间
@@ -73,8 +78,8 @@ pic = {
 	        })
 	    });
       	//点击保存按钮
-      	$("#save").on("click",function(){
-      		$("#total_pic").html('');
+      	$("#create_modal").on("click",function(){
+      		/*$("#total_pic").html('');
       		var str;
            $.each(native_data,function(key,item){
            	str = '<div class="row">'+
@@ -82,7 +87,7 @@ pic = {
 	                '<div class="columns small-6 medium-2"><span class="right">'+item+'张</span>'+
 	              '</div>';
           	$("#total_pic").append(str);
-           });
+           });*/
            $('#saveModal').foundation('reveal', 'open');
       	});
       	//点击保存提交的按钮

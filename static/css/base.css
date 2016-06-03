@@ -29,3 +29,6 @@ ul{margin-bottom: 0;line-height: 3.6}
 @media only screen and (max-width: 40em){
 	.reveal-modal, dialog{min-height: auto}
 }
+
+.tiny_button {padding-top: 0.125rem;padding-right: 0.25rem;padding-bottom: 0.1875rem;padding-left: 0.25rem;font-size: 0.1875rem; }
+.product_select{width:15%;}
