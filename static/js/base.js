@@ -1,7 +1,7 @@
 var pic = {};
 pic = {
 	init:function(){
-		// pic.choose();
+		pic.choose();
 		pic.add();
 	},
 	choose:function(){
