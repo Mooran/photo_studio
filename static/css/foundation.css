@@ -166,11 +166,11 @@ select {
   width: 100%;
   float: left; }
 
-[class*="column"] + [class*="column"]:last-child {
-  float: right; }
+/*[class*="column"] + [class*="column"]:last-child {
+  float: right; }*/
 
-[class*="column"] + [class*="column"].end {
-  float: left; }
+/*[class*="column"] + [class*="column"].end {
+  float: left; }*/
 
 @media only screen {
   .small-push-0 {
@@ -1463,7 +1463,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   margin: 0 0 1rem 0;
   padding: 0.5rem;
   height: 2.3125rem;
-  width: 100%;
+  width: 80%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
