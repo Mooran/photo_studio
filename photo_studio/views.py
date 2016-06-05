@@ -28,7 +28,7 @@ def index(request,access_key):
     data['product_list'] = product_list
     data['unique_id'] = unique_id
     data['photo_list'] = photo_list
-    print data
+    print "0000000000",data
     template = get_template('detail.html')
     variables = RequestContext(request,data)
     output = template.render(variables)
