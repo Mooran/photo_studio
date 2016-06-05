@@ -37,11 +37,6 @@ pic = {
 	add:function(){
 		var pic_name = "";
 		var native_data = {};
-		//弹窗打开之前的操作
-		$(".pic_box").on('open.fndtn.reveal', '[data-reveal]', function () {
-			var modal = $(this);
-			//modal.find("span").html(pic_name);
-		});
 
 		$('input[name="pic_id"]').on("click",function(){
 			event.stopPropagation();
@@ -55,7 +50,6 @@ pic = {
                 num = $(num_list[i]).val();
                 native_data[nam] = num;
             }
-	    	
 	    	$(".close-reveal-modal").trigger("click");
 	    });
 	    //点击添加按钮触发的时间
@@ -93,7 +87,6 @@ pic = {
       		var product_photo_list = {};
       		var product_id = $(".active").data("productid");
       		var unique_id = $("#unique_id").val();
-      		console.log(product_id)
       		$("input:checked").each(function(){
       			product_photo_list.product_id = product_id;
       			product_photo_list.photo_id = $(this).val();
@@ -112,10 +105,6 @@ pic = {
 
       			}
       		})
-      	});
-      	//点击保存提交的按钮
-      	$("#submit").on("click",function(){
-      		$(".close-reveal-modal").trigger("click");
       	});
 	}
 };
