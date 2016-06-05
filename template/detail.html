@@ -16,21 +16,19 @@
 
   <div class="off-canvas-wrap docs-wrap" data-offcanvas="">
     <div class="inner-wrap">
-      <nav class="tab-bar">
 
+      <nav class="tab-bar">
         <section class="right-small show-for-small">
           <a class="right-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
         </section>
-
         <section class="right tab-bar-section hide-for-small">
           <ul class="inline-list nav_right">
             <li><a href="#" id="unchoose">查看未选</a></li>
             <li><a href="#" id="choosed">查看已选</a></li>
-            <li id="create_modal"><a href="#">添加产品</a></li>            
           </ul>
         </section>
-        <section class="middle tab-bar-section">
-          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;">产品A<i class="fi-arrow-down"></i></a>
+        <section class="columns small-9 middle tab-bar-section">
+          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;">产品<img src="/static/img/drop.png" style="max-width: 20px" /></a>
           <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
               <li><a href="#">产品B</a></li>
               <li><a href="#">产品C</a></li>
@@ -40,112 +38,31 @@
         </section>
       </nav>
 
-      <!--aside class="left-off-canvas-menu">
-        <ul class="off-canvas-list">
-          <li><a href="#" id="choosed">产品A</a></li>
-          <li><a href="#" id="choosed">产品B</a></li>
-          <li><a href="#" id="unchoose">产品C</a></li>   
-        </ul>
-      </aside-->
+      <nav class="tab-bar" data-id="choosed" style="display: none;">
+        <section class="left-small tab-bar-section">
+          <a href="" style="font-size: 16px;color: #fff"><span style="font-size: 25px">< </span>返回产品选择</a>
+        </section>
+        <section class="right tab-bar-section" style="text-align: center;">
+          <a href="#" style="color:#FFFFFF;font-size:16px;">已选产品</a>
+        </section>
+      </nav>
 
       <aside class="right-off-canvas-menu">
         <ul class="off-canvas-list">
           <li><a href="#" id="create_modal">添加产品</a></li>
           <li><a href="#" id="choosed">查看已选</a></li>
-          <li><a href="#" id="unchoose">查看未选</a></li>   
-        </ul>
-      </aside>
-    <!--nav class="top-bar" data-topbar role="navigation">
-      <ul class="title-area">
-        <li class="name">
-        </li>
-      </ul>
-
-      <section class="top-bar-section">
-        <ul class="right">
-          <li><a href="#" id="choosed">添加产品</a></li>
-          <li><a href="#" id="choosed">查看已选</a></li>
           <li><a href="#" id="unchoose">查看未选</a></li>
         </ul>
-
-        <ul class="left">
-          <li class="has-dropdown">
-            <a href="#">产品A</a>
-            <ul class="dropdown">
-              <li><a href="#">产品B</a></li>
-              <li class=""><a href="#">产品C</a></li>
-              <li class=""><a href="#">产品D</a></li>
-              <li class=""><a href="#">产品E</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-    </nav-->
+      </aside>
     <section class="main-section">
       <div class="">
         <div class="large-12 columns">
-          <!--header class="title">
-            <div class="small-5 columns clear_padding">
-              <h4><img src="/static/img/03.png" />在线选片</h4>
-              
-            </div>
-            <div class="small-7 medium-7 columns right clear_padding">
-              <ul class="inline-list">
-                <li><a href="#" id="unchoose">未选</a></li>
-                <li><a href="#" id="choosed">已选</a></li>
-              </ul>
-            </div>
-          </header-->
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
-              <li class="small-6 medium-3 large-2">
-                <a href="/static/img/02.jpg">
-                    <img src="/static/img/02.jpg"  />
-                </a>
-                <p class="text-left">
-                    <span data-name="001.jpg">001.jpg</span><!--a href="#" class="add_pic right" data-reveal-id="myModal">添加</a-->
-                    <a href="#" onclick="add_num"><i class="fi-plus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                    <span class="right" style="margin-right:10px;">0</span>
-                    <a href="#"><i class="fi-minus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                </p>
-              </li>
-
-              <li class="small-6 medium-3 large-2">
-                <a href="/static/img/02.jpg">
-                    <img src="/static/img/02.jpg"  />
-                </a>
-                <p class="text-left">
-                    <span data-name="002.jpg">002.jpg</span><!--a href="#" class="add_pic right" data-reveal-id="myModal">添加</a-->
-                    <a href="#"><i class="fi-plus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                    <span class="right" style="margin-right:10px;">0</span>
-                    <a href="#"><i class="fi-minus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                </p>
-              </li>
-
-              <li class="small-6 medium-3 large-2">
-                <a href="/static/img/02.jpg">
-                    <img src="/static/img/02.jpg"  />
-                </a>
-                <p class="text-left">
-                    <span data-name="003.jpg">003.jpg</span><!--a href="#" class="add_pic right" data-reveal-id="myModal">添加</a-->
-                    <a href="#"><i class="fi-plus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                    <span class="right" style="margin-right:10px;">0</span>
-                    <a href="#"><i class="fi-minus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                </p>
-              </li>
-
-              <li class="small-6 medium-3 large-2">
-                <a href="/static/img/02.jpg">
-                    <img src="/static/img/02.jpg"  />
-                </a>
-                <p class="text-left">
-                    <span data-name="004.jpg">004.jpg</span><!--a href="#" class="add_pic right" data-reveal-id="myModal">添加</a-->
-                    <a href="#"><i class="fi-plus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                    <span class="right" style="margin-right:10px;">0</span>
-                    <a href="#"><i class="fi-minus right" style="color: #008CBA;margin-right: 10px;"></i></a>
-                </p>
-              </li>
-              
+              <li class="small-6 medium-3 large-2"><a href="/static/img/02.jpg"><img src="/static/img/02.jpg"  /></a><p class="text-center"><span data-name="001.jpg">001.jpg</span></p><input type="checkbox" value="3" name="pic_id" /></li>
+              <li class="small-6 medium-3 large-2"><a href="/static/img/02.jpg"><img src="/static/img/02.jpg"  /></a><p class="text-center"><span data-name="002.jpg">002.jpg</span></p><input type="checkbox" value="3" name="pic_id" /></li>
+              <li class="small-6 medium-3 large-2"><a href="/static/img/02.jpg"><img src="/static/img/02.jpg"  /></a><p class="text-center"><span data-name="002.jpg">002.jpg</span></p><input type="checkbox" value="3" name="pic_id" /></li>
+              <li class="small-6 medium-3 large-2"><a href="/static/img/01.jpg"><img src="/static/img/02.jpg"  /></a><p class="text-center"><span data-name="002.jpg">002.jpg</span></p><input type="checkbox" value="4" name="pic_id" /></li>
             </ul>
           </section>
         </div>
@@ -155,7 +72,7 @@
   </div>
   <br> 
 
-    <a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
+    <!-- <a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
 
     <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
       <h2 id="modalTitle"></h2>
@@ -171,7 +88,7 @@
         <a href="#" class="button expand" id="">确定</a>
       </p>
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-    </div>
+    </div> -->
 
     <a href="#" class="button expand" id="save">保存</a>
 
