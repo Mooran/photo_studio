@@ -5,28 +5,24 @@ pic = {
 		pic.add();
 	},
 	choose:function(){
-		$("#choosed").on("click",function(){
+		$(".choosed").on("click",function(){
+			$('nav[data-id="choosed"]').show();
+			$('nav[data-id="prodect_list"]').hide();
+			$(".off-canvas-wrap").removeClass("move-left");
 	        $(".clearing-thumbs").find("li").hide();
 	        $("input:checked").parent().show();
 	      });
-	      $("#unchoose").on("click",function(){
+        $(".unchoose").on("click",function(){
+	      	$('nav[data-id="unchoose"]').show();
+			$('nav[data-id="prodect_list"]').hide();
+			$(".off-canvas-wrap").removeClass("move-left");
 	        $(".clearing-thumbs").find("li").show();
 	        $("input:checked").parent().hide();
 	      });
-	      $("#allchoose").on("click",function(){
-	        $(".clearing-thumbs").find("li").show();
-	        $(".clearing-thumbs li").find("input").prop("checked",true);
-	      });
-	      $("#inverse").on("click",function(){
-	        $(".clearing-thumbs li").find("input").each(function(){
-	          var checked = $(this).prop("checked");
-	          if(checked){
-	            $(this).prop("checked",false);
-	          }else{
-	            $(this).prop("checked",true);
-	          }
-	        })
-	      });
+        $("#drop1>li").on("click",function(){
+        	var str = $(this).text();
+        	$(".dropdown").find("span").html(str);
+        });
 	},
 	add:function(){
 		var pic_name = "";
@@ -36,6 +32,10 @@ pic = {
 			var modal = $(this);
 			//modal.find("span").html(pic_name);
 		});
+
+		$('input[name="pic_id"]').on("click",function(){
+			event.stopPropagation();
+		})
 		//添加图片数量是点击确定，将数据暂存本地
 	    $("#sure").on("click",function(){
 	    	var nam_list = $(this).parents("#myModal").find("span");
@@ -78,17 +78,8 @@ pic = {
 	        })
 	    });
       	//点击保存按钮
-      	$("#create_modal").on("click",function(){
-      		/*$("#total_pic").html('');
-      		var str;
-           $.each(native_data,function(key,item){
-           	str = '<div class="row">'+
-	                '<div class="columns small-6 medium-7"><span>'+key+'</span></div>'+
-	                '<div class="columns small-6 medium-2"><span class="right">'+item+'张</span>'+
-	              '</div>';
-          	$("#total_pic").append(str);
-           });*/
-           $('#saveModal').foundation('reveal', 'open');
+      	$("#save").on("click",function(){
+      		alert("保存成功")
       	});
       	//点击保存提交的按钮
       	$("#submit").on("click",function(){

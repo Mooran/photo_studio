@@ -21,6 +21,8 @@ ul{margin-bottom: 0;line-height: 3.6}
 .dropdown li>a:hover{background: #1450B8}
 .pic_box .th img{height: 220px;}
 .reveal-modal span{font-size: 25px;}
+.dropdown span{font-size: 16px;}
+.rechoose{color:#FFFFFF;font-size:16px;}
 .button{padding: 10px 40px;margin-top: 20px;margin-bottom: 0;}
 #save{position: fixed;bottom: 20px;}
 @media only screen and (max-width: 40.063em){
