@@ -9,7 +9,7 @@ pic = {
 			$('nav[data-id="choosed"]').show();
 			$('nav[data-id="prodect_list"]').hide();
 			$(".off-canvas-wrap").removeClass("move-right");
-			$(".rechoose").html("已选产品");
+			$(".rechoose").html("已选照片");
 	        $(".clearing-thumbs").find("li").hide();
 	        $("input:checked").parent().show();
 	      });
@@ -17,7 +17,7 @@ pic = {
 	      	$('nav[data-id="choosed"]').show();
 			$('nav[data-id="prodect_list"]').hide();
 			$(".off-canvas-wrap").removeClass("move-right");
-			$(".rechoose").html("未选产品");
+			$(".rechoose").html("未选照片");
 	        $(".clearing-thumbs").find("li").show();
 	        $("input:checked").parent().hide();
 	      });
