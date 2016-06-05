@@ -13,13 +13,13 @@
     <script src="/static/js/vendor/modernizr.js"></script>
   </head>
   <body>
-
+  <input type="hidden" id="unique_id" value="{{unique_id}}" />
   <div class="off-canvas-wrap docs-wrap" data-offcanvas="">
     <div class="inner-wrap">
 
       <nav class="tab-bar" data-id="prodect_list">
-        <section class="right-small show-for-small">
-          <a class="right-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
+        <section class="left-small show-for-small">
+          <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
         </section>
         <section class="right tab-bar-section hide-for-small">
           <ul class="inline-list nav_right">
@@ -27,27 +27,28 @@
             <li><a href="#" class="choosed">查看已选</a></li>
           </ul>
         </section>
-        <section class="columns small-9 middle tab-bar-section">
-          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span>产品</span><img src="/static/img/drop.png" style="max-width: 20px" /></a>
+        <section class="columns small-9 middle tab-bar-section" id="product_type_choose">
+          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span class="active" data-productid="{{product_list.0.id}}">{{product_list.0.name}}</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
           <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
             {% for product in product_list %}
-              <li><a href="#">{{product.name}}</a></li>
+              <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
             {% endfor %}
           </ul>
         </section>
       </nav>
 
       <nav class="tab-bar" data-id="choosed" style="display: none;">
-        <section class="left-small tab-bar-section">
-          <a href="javascript:;" style="font-size: 16px;color: #fff"><span style="font-size: 25px">< </span></a>
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
         </section>
         <section class="right tab-bar-section text-center">
           <span class="rechoose">已选产品</span>
         </section>
       </nav>
 
-      <aside class="right-off-canvas-menu">
+      <aside class="left-off-canvas-menu">
         <ul class="off-canvas-list">
+          <li><a href="#" class="choose_pic">选片</a></li>
           <li><a href="#" class="choosed">查看已选</a></li>
           <li><a href="#" class="unchoose">查看未选</a></li>
         </ul>
@@ -58,7 +59,7 @@
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
             {% for photo in photo_list %}
-              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="3" name="pic_id" /></li>
+              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" /></li>
             {% endfor %}
             </ul>
           </section>

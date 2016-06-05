@@ -8,19 +8,29 @@ pic = {
 		$(".choosed").on("click",function(){
 			$('nav[data-id="choosed"]').show();
 			$('nav[data-id="prodect_list"]').hide();
-			$(".off-canvas-wrap").removeClass("move-left");
+			$(".off-canvas-wrap").removeClass("move-right");
+			$(".rechoose").html("已选产品");
 	        $(".clearing-thumbs").find("li").hide();
 	        $("input:checked").parent().show();
 	      });
         $(".unchoose").on("click",function(){
-	      	$('nav[data-id="unchoose"]').show();
+	      	$('nav[data-id="choosed"]').show();
 			$('nav[data-id="prodect_list"]').hide();
-			$(".off-canvas-wrap").removeClass("move-left");
+			$(".off-canvas-wrap").removeClass("move-right");
+			$(".rechoose").html("未选产品");
 	        $(".clearing-thumbs").find("li").show();
 	        $("input:checked").parent().hide();
 	      });
+        $(".choose_pic").on("click",function(){
+        	$('nav[data-id="choosed"]').hide();
+			$('nav[data-id="prodect_list"]').show();
+			$(".clearing-thumbs").find("li").show();
+			$(".off-canvas-wrap").removeClass("move-right");
+        });
         $("#drop1>li").on("click",function(){
         	var str = $(this).text();
+        	$("#product_type_choose").find("*[data-productid]").removeClass("active");
+        	$(this).find("*[data-productid]").addClass("active");
         	$(".dropdown").find("span").html(str);
         });
 	},
@@ -79,7 +89,29 @@ pic = {
 	    });
       	//点击保存按钮
       	$("#save").on("click",function(){
-      		alert("保存成功")
+      		var postdata = [];
+      		var product_photo_list = {};
+      		var product_id = $(".active").data("productid");
+      		var unique_id = $("#unique_id").val();
+      		console.log(product_id)
+      		$("input:checked").each(function(){
+      			product_photo_list.product_id = product_id;
+      			product_photo_list.photo_id = $(this).val();
+      			postdata.push(product_photo_list);
+      		});
+      		postdata = JSON.stringify(postdata);
+      		$.ajax({
+      			type:"post",
+      			url:"/photo/pick",
+      			dataType:"json",
+      			data:{unique_id:unique_id,"product_id":product_id,"product_photo_list":postdata},
+      			success:function(res){
+      				alert("保存成功")
+      			},
+      			error:function(res){
+
+      			}
+      		})
       	});
       	//点击保存提交的按钮
       	$("#submit").on("click",function(){
