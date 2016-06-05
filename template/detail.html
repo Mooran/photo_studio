@@ -27,8 +27,8 @@
             <li><a href="#" class="choosed">查看已选</a></li>
           </ul>
         </section>
-        <section class="columns small-9 middle tab-bar-section">
-          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span class="active" data-productid="{{product.0.id}}">{{product_list.0.name}}</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
+        <section class="columns small-9 middle tab-bar-section" id="product_type_choose">
+          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span class="active" data-productid="{{product_list.0.id}}">{{product_list.0.name}}</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
           <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
             {% for product in product_list %}
               <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
@@ -59,7 +59,7 @@
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
             {% for photo in photo_list %}
-              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="3" name="pic_id" /></li>
+              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" /></li>
             {% endfor %}
             </ul>
           </section>

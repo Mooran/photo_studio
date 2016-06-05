@@ -29,6 +29,8 @@ pic = {
         });
         $("#drop1>li").on("click",function(){
         	var str = $(this).text();
+        	$("#product_type_choose").find("*[data-productid]").removeClass("active");
+        	$(this).find("*[data-productid]").addClass("active");
         	$(".dropdown").find("span").html(str);
         });
 	},
@@ -87,22 +89,29 @@ pic = {
 	    });
       	//点击保存按钮
       	$("#save").on("click",function(){
-      		var product_photo_list = [];
+      		var postdata = [];
+      		var product_photo_list = {};
       		var product_id = $(".active").data("productid");
       		var unique_id = $("#unique_id").val();
+      		console.log(product_id)
+      		$("input:checked").each(function(){
+      			product_photo_list.product_id = product_id;
+      			product_photo_list.photo_id = $(this).val();
+      			postdata.push(product_photo_list);
+      		});
+      		postdata = JSON.stringify(postdata);
       		$.ajax({
       			type:"post",
       			url:"/photo/pick",
       			dataType:"json",
-      			data:{unique_id:unique_id,"product_id":product_id},
+      			data:{unique_id:unique_id,"product_id":product_id,"product_photo_list":postdata},
       			success:function(res){
-      				console.log("success")
+      				alert("保存成功")
       			},
       			error:function(res){
 
       			}
       		})
-      		alert("保存成功")
       	});
       	//点击保存提交的按钮
       	$("#submit").on("click",function(){
