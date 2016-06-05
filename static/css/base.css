@@ -23,8 +23,10 @@ ul{margin-bottom: 0;line-height: 3.6}
 .reveal-modal span{font-size: 25px;}
 .dropdown span{font-size: 16px;}
 .rechoose{color:#FFFFFF;font-size:16px;}
+.fallback{font-size: 16px;color: #fff}
+.inner-wrap{min-height: 400px;}
 .button{padding: 10px 40px;margin-top: 20px;margin-bottom: 0;}
-#save{position: fixed;bottom: 20px;}
+#save{position: fixed;bottom: 0px;}
 @media only screen and (max-width: 40.063em){
 	.pic_box .th img{height: 120px;}
 }
