@@ -25,6 +25,7 @@
           <ul class="inline-list nav_right">
             <li><a href="#" class="unchoose">查看未选</a></li>
             <li><a href="#" class="choosed">查看已选</a></li>
+            <li><a href="#" class="choose_pic">在线选片</a></li>
           </ul>
         </section>
         <section class="columns small-9 middle tab-bar-section" id="product_type_choose">
@@ -37,8 +38,15 @@
         </section>
       </nav>
 
-      <nav class="tab-bar" data-id="choosed" style="display: none;position: fixed;top: 0px">
-        <section class="left-small">
+      <nav class="tab-bar" data-id="choosed" style="display: none;">
+        <section class="left tab-bar-section hide-for-small" style="z-index: 1000;">
+          <ul class="inline-list nav_right">
+            <li><a href="#" class="unchoose">查看未选</a></li>
+            <li><a href="#" class="choosed">查看已选</a></li>
+            <li><a href="#" class="choose_pic">在线选片</a></li>
+          </ul>
+        </section>
+        <section class="left-small show-for-small">
           <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
         </section>
         <section class="right tab-bar-section text-center">
@@ -68,25 +76,7 @@
     </section>
     </div>
   </div>
-  <br> 
-
-    <!-- <a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
-
-    <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-      <h2 id="modalTitle"></h2>
-      <p class="lead">添加产品</p>
-      <p>
-        <select>
-          <option>产品A</option>
-          <option>产品B</option>
-          <option>产品C</option>
-        </select>
-      </p>
-      <p>
-        <a href="#" class="button expand" id="">确定</a>
-      </p>
-      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-    </div> -->
+  <br>
 
     <a href="#" class="button expand" id="save">保存</a>
 
