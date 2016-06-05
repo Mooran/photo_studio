@@ -11,8 +11,8 @@ import photo_studio.views
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'photo_studio.views.index', name='index'),
-    url(r'^index$', 'photo_studio.views.index', name='index'),
+    url(r'^(?P<access_key>.*)$', 'photo_studio.views.index', name='index'),
+    # url(r'^index$', 'photo_studio.views.index', name='index'),
     url(r'^photo/upload$', 'photo_studio.views.upload', name='photo.upload'),
     url(r'^photo/pick$', 'photo_studio.views.pick_photo', name='photo.pick'),
     # url(r'^photo_studio/', include('photo_studio.foo.urls')),

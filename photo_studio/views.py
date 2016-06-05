@@ -10,9 +10,27 @@ from decorators import jsonapi
 from models.models import *
 
 
-def index(request):
+def index(request,access_key):
+    if not access_key:
+        return HttpResponse('链接不存在',content_type='text/html; charset=UTF-8')
+
+    order_object = Order.objects.filter(access_path=access_key)
+    if not order_object:
+        return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
+    unique_id = order_object[0].unique_id
+    product_list = Product.objects.filter(unique_id=unique_id)
+    temp_photo_list = Photo.objects.filter(unique_id=unique_id)
+    photo_list = []
+    for temp_photo in temp_photo_list:
+        photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name})
+    data = locals()
+    data['product_list'] = product_list
+    data['unique_id'] = unique_id
+    data['photo_list'] = photo_list
+    print data
     template = get_template('detail.html')
-    variables = RequestContext(request,{})
+    variables = RequestContext(request,data)
     output = template.render(variables)
     return HttpResponse(output, content_type='text/html; charset=UTF-8')
 
@@ -45,3 +63,14 @@ def upload(request):
     file_obj = Photo(unique_id=unique_id,image=img_file,name=name,scene_name=scene_name)
     file_obj.save()
     return HttpResponse('ok')
+
+
+@csrf_exempt
+@jsonapi()
+def push_order(request):
+    pass
+
+@csrf_exempt
+@jsonapi()
+def push_product(request):
+    pass

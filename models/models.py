@@ -16,6 +16,7 @@ class Order(models.Model):
     studio_name = models.CharField(max_length=64)
     studio_phone = models.CharField(max_length=32)
     scene_name = models.CharField(max_length=64)
+    access_path = models.CharField(max_length=64)
 
 
 
@@ -40,7 +41,7 @@ class Photo(models.Model):
     unique_id = models.CharField(max_length=64)
     image = models.ImageField(upload_to='photo')
     name = models.CharField(max_length=64)
-    scene_name = models.CharField(max_length=64)
+    scene_name = models.CharField(max_length=64,blank=True)
 
 
 class PhotoPick(models.Model):
