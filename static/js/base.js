@@ -81,6 +81,10 @@ pic = {
 	        	}
 	        })
 	    });
+	    $(".alert-box").find(".close").on("click",function(){
+	    	event.stopPropagation();
+	    	$(this).parent().hide();
+	    });
       	//点击保存按钮
       	$("#save").on("click",function(){
       		var postdata = [];
@@ -99,10 +103,14 @@ pic = {
       			dataType:"json",
       			data:{unique_id:unique_id,"product_id":product_id,"product_photo_list":postdata},
       			success:function(res){
-      				alert("保存成功")
+      				if(res.status == 0){
+      					$(".alert-box.success").fadeIn();
+      				}else if(res.status == 1){
+      					$(".alert-box.alert").fadeIn();
+      				}
       			},
       			error:function(res){
-
+      				$(".alert-box.alert").fadeIn();
       			}
       		})
       	});

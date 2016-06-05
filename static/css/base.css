@@ -25,6 +25,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 .rechoose{color:#FFFFFF;font-size:16px;}
 .fallback{font-size: 16px;color: #fff}
 .inner-wrap{min-height: 400px;}
+.alert-box{position: fixed;top: 40%;width: 70%;left: 17%;text-align: center;display: none}
 .button{padding: 10px 40px;margin-top: 20px;margin-bottom: 0;}
 #save{position: fixed;bottom: 0px;}
 @media only screen and (max-width: 40.063em){
