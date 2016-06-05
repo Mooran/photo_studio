@@ -26,7 +26,7 @@ def index(request,access_key):
     photo_list = []
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':photo.id})
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id})
     data = locals()
     data['product_list'] = product_list
     data['unique_id'] = unique_id
