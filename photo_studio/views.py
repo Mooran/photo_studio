@@ -6,10 +6,13 @@ from django.template.loader import get_template
 from django.core.files.base import ContentFile
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.gzip import gzip_page
 from decorators import jsonapi
 from models.models import *
 
 
+
+@gzip_page
 def index(request,access_key):
     if not access_key:
         return HttpResponse('链接不存在',content_type='text/html; charset=UTF-8')
@@ -23,7 +26,7 @@ def index(request,access_key):
     photo_list = []
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name})
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':photo.id})
     data = locals()
     data['product_list'] = product_list
     data['unique_id'] = unique_id
