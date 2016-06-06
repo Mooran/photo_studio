@@ -27,60 +27,76 @@ pic = {
 			$(".clearing-thumbs").find("li").show();
 			$(".off-canvas-wrap").removeClass("move-right");
         });
-        $("#drop1>li").on("click",function(){
-        	var str = $(this).text();
-        	$("#product_type_choose").find("*[data-productid]").removeClass("active");
-        	$(this).find("*[data-productid]").addClass("active");
-        	$(".dropdown").find("span").html(str);
-        });
+        
 	},
 	add:function(){
 		var pic_name = "";
 		var native_data = {};
+		var local_arry = [];
+		var local_ob = {};
+		var local_photo_list = [];
+		var tip_show = $(".dropdown").find("input").val();
+
+		Array.prototype.remove = function(val) {
+			var index = this.indexOf(val);
+			if (index > -1) {
+			this.splice(index, 1);
+			}
+		};
 
 		$('input[name="pic_id"]').on("click",function(){
 			event.stopPropagation();
-		})
-		//添加图片数量是点击确定，将数据暂存本地
-	    $("#sure").on("click",function(){
-	    	var nam_list = $(this).parents("#myModal").find("span");
-	    	var num_list = $(this).parents("#myModal").find("input");
-            for(var i=0;i<nam_list.length;i++){
-                nam = $(nam_list[i]).html();
-                num = $(num_list[i]).val();
-                native_data[nam] = num;
-            }
-	    	$(".close-reveal-modal").trigger("click");
-	    });
-	    //点击添加按钮触发的时间
-      	$(".add_pic").on("click",function(){
-        	event.stopPropagation();
-        	pic_name = $(this).parent().find("span").data("name");
-        	if(native_data[pic_name]){
-        		$("#pic_number").val(native_data[pic_name]);
-        	}else{
-        		$("#pic_number").val("0");
-        	};
-        	$('#myModal').foundation('reveal', 'open');
-      	});
-      	//点击查看已选
-      	$("#choosed").on("click",function(){
-      		$(".clearing-thumbs").find("li").hide();
-	        $.each(native_data,function(key,item){
-	        	if(item != "0"){
-	        		$(".clearing-thumbs").find('span[data-name="'+key+'"]').parent().parent().show();
-	        	}
-	        })
-	    });
-	    //点击查看未选
-      	$("#unchoose").on("click",function(){
-      		$(".clearing-thumbs").find("li").show();
-	        $.each(native_data,function(key,item){
-	        	if(item != "0"){
-	        		$(".clearing-thumbs").find('span[data-name="'+key+'"]').parent().parent().hide();
-	        	}
-	        })
-	    });
+			var that = this;
+			var isinside = false;
+			var local_product_id = $(".active").data("productid");
+			if($(this).prop("checked")){
+				$.each(local_arry,function(i,val){
+					if(local_product_id == val.product_id){
+						val.photo_list.push($(that).val());
+						isinside = true;
+					}
+				})
+				if(isinside){
+					return;
+				}
+				if(tip_show != local_product_id){
+					local_photo_list = [];
+					local_ob = {};
+				}
+				local_photo_list.push($(this).val());
+				local_ob.product_id = local_product_id;
+				local_ob.photo_list = local_photo_list;
+				if(tip_show != local_product_id){
+					tip_show = local_product_id;
+					local_arry.push(local_ob);
+				}
+				console.log(local_arry)
+			}else{
+				$.each(local_arry,function(i,val){
+					if(val.product_id == local_product_id){
+						val.photo_list.remove($(that).val());
+					}
+				})
+				console.log(local_arry)
+			}
+		});
+
+		$("#drop1>li").on("click",function(){
+        	var str = $(this).text();
+        	$("#product_type_choose").find("*[data-productid]").removeClass("active");
+        	$(this).find("*[data-productid]").addClass("active");
+        	$(".dropdown").find("span").html(str);
+        	$("input").prop("checked",false);
+        	var local_product_id = $(".active").data("productid");
+        	$.each(local_arry,function(i,val){
+				if(val.product_id == local_product_id){
+					$.each(val.photo_list,function(key,item){
+						$('input[value="'+item+'"]').prop("checked",true);
+					})
+				}
+			})
+        });
+
 	    $(".alert-box").find(".close").on("click",function(){
 	    	event.stopPropagation();
 	    	$(this).parent().hide();
@@ -101,7 +117,7 @@ pic = {
       			type:"post",
       			url:"/photo/pick",
       			dataType:"json",
-      			data:{unique_id:unique_id,"product_id":product_id,"product_photo_list":postdata},
+      			data:{unique_id:unique_id,product_photo_list:JSON.stringify(local_arry)},
       			success:function(res){
       				if(res.status == 0){
       					$(".alert-box.success").fadeIn();
