@@ -51,7 +51,6 @@ def pick_photo(request):
     for product_photo in product_photo_list:
         product_id = product_photo.get('product_id')
         for photo_id in product_photo['photo_list']:
-            photo_id = product_photo.get('photo_id')
             create_obj_list.append(PhotoPick(unique_id=unique_id,product_id=product_id,photo_id=photo_id))
     PhotoPick.objects.bulk_create(create_obj_list)
     return '保存成功'
