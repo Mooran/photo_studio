@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     # url(r'^index$', 'photo_studio.views.index', name='index'),
     url(r'^photo/upload$', 'photo_studio.views.upload', name='photo.upload'),
     url(r'^photo/pick$', 'photo_studio.views.pick_photo', name='photo.pick'),
+    url(r'^order/push$', 'photo_studio.views.push_order', name='order.push'),
+    url(r'^product/push$', 'photo_studio.views.push_product', name='product.push'),
+    url(r'^order/get_customer_pick$', 'photo_studio.views.get_customer_pick', name='order.pick'),
     # url(r'^photo_studio/', include('photo_studio.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

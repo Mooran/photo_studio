@@ -10,13 +10,13 @@ class Order(models.Model):
 
     id = models.AutoField(primary_key=True)
     unique_id = models.CharField(max_length=64,unique=True)
-    order_num = models.CharField(max_length=64)
-    customer_name = models.CharField(max_length=32)
-    customer_phone = models.CharField(max_length=32)
-    studio_name = models.CharField(max_length=64)
-    studio_phone = models.CharField(max_length=32)
-    scene_name = models.CharField(max_length=64)
-    access_path = models.CharField(max_length=64)
+    order_num = models.CharField(max_length=64,blank=True)
+    customer_name = models.CharField(max_length=32,blank=True)
+    customer_phone = models.CharField(max_length=32,blank=True)
+    studio_name = models.CharField(max_length=64,blank=True)
+    studio_phone = models.CharField(max_length=32,blank=True)
+    scene_name = models.CharField(max_length=64,blank=True)
+    access_path = models.CharField(max_length=64,blank=True)
 
 
 
@@ -30,7 +30,7 @@ class Product(models.Model):
     product_id = models.CharField(max_length=64)
     name = models.CharField(max_length=64)
     num = models.IntegerField(default=1)
-    unit_price = models.FloatField(default=0)
+    unit_price = models.FloatField(default=0,blank=True)
 
 class Photo(models.Model):
 
@@ -41,7 +41,7 @@ class Photo(models.Model):
     unique_id = models.CharField(max_length=64)
     image = models.ImageField(upload_to='photo')
     name = models.CharField(max_length=64)
-    scene_name = models.CharField(max_length=64,blank=True)
+    scene_name = models.CharField(max_length=64,blank=True,null=True)
 
 
 class PhotoPick(models.Model):

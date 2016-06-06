@@ -15,7 +15,7 @@ def jsonapi():
                 data = _func(request)
                 r['data'] = data
             except Exception, e:
-                r.update({'status':1,'msg':'失败','data':e})
+                r.update({'status':1,'msg':'失败','data':e.message})
             end_time = time.time()
             return HttpResponse(json.dumps(r), mimetype="application/json")
         return _new_func
