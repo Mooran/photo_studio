@@ -144,7 +144,7 @@ def get_customer_pick(request):
     for product_id in product_photo_dict:
         temp_dict = {'product_id':product_id,
                      'name':product_photo_dict[product_id]['name'],
-                     'num':product_photo_dict[product_id]['name'],
+                     'num':product_photo_dict[product_id]['num'],
                      'photo_list':'|'.join(product_photo_dict[product_id]['photo_list'])
                     }
         result.append(temp_dict)
