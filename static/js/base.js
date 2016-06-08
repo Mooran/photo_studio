@@ -1,33 +1,7 @@
 var pic = {};
 pic = {
 	init:function(){
-		pic.choose();
 		pic.add();
-	},
-	choose:function(){
-		$(".choosed").on("click",function(){
-			$('nav[data-id="choosed"]').show();
-			$('nav[data-id="prodect_list"]').hide();
-			$(".off-canvas-wrap").removeClass("move-right");
-			$(".rechoose").html("已选照片");
-	        $(".clearing-thumbs").find("li").hide();
-	        $("input:checked").parent().show();
-	      });
-        $(".unchoose").on("click",function(){
-	      	$('nav[data-id="choosed"]').show();
-			$('nav[data-id="prodect_list"]').hide();
-			$(".off-canvas-wrap").removeClass("move-right");
-			$(".rechoose").html("未选照片");
-	        $(".clearing-thumbs").find("li").show();
-	        $("input:checked").parent().hide();
-	      });
-        $(".choose_pic").on("click",function(){
-        	$('nav[data-id="choosed"]').hide();
-			$('nav[data-id="prodect_list"]').show();
-			$(".clearing-thumbs").find("li").show();
-			$(".off-canvas-wrap").removeClass("move-right");
-        });
-        
 	},
 	add:function(){
 		var pic_name = "";
@@ -43,6 +17,51 @@ pic = {
 			this.splice(index, 1);
 			}
 		};
+		//查看已选
+		$(".choosed").on("click",function(){
+			$('nav[data-id="choosed"]').show();
+			$('nav[data-id="prodect_list"]').hide();
+			$(".off-canvas-wrap").removeClass("move-right");
+			$(".rechoose").html("已选照片");
+	        $(".clearing-thumbs").find("li").hide();
+	        $.each(local_arry,function(i,val){
+				$.each(val.photo_list,function(key,item){
+					$(".clearing-thumbs").find('input[value="'+item+'"]').parent().show();
+					$(".clearing-thumbs").find('input[value="'+item+'"]').prop("checked",true);
+				})
+			});
+	    });
+
+	    //查看未选
+		$(".unchoose").on("click",function(){
+	      	$('nav[data-id="choosed"]').show();
+			$('nav[data-id="prodect_list"]').hide();
+			$(".off-canvas-wrap").removeClass("move-right");
+			$(".rechoose").html("未选照片");
+	        $(".clearing-thumbs").find("li").show();
+	        $.each(local_arry,function(i,val){
+				$.each(val.photo_list,function(key,item){
+					$(".clearing-thumbs").find('input[value="'+item+'"]').parent().hide();
+					$(".clearing-thumbs").find('input[value="'+item+'"]').prop("checked",false);
+				})
+			});
+        });
+		//在线选片
+        $(".choose_pic").on("click",function(){
+        	var local_product_id = $(".active").data("productid");
+        	$('nav[data-id="choosed"]').hide();
+			$('nav[data-id="prodect_list"]').show();
+			$(".clearing-thumbs").find("li").show();
+			$(".clearing-thumbs").find("input").prop("checked",false);
+			$(".off-canvas-wrap").removeClass("move-right");
+			$.each(local_arry,function(i,val){
+				if(local_product_id == val.product_id){
+					$.each(val.photo_list,function(key,item){
+						$('input[value="'+item+'"]').prop("checked",true);
+					})
+				}
+			})
+        });
 
 		$('input[name="pic_id"]').on("click",function(){
 			event.stopPropagation();
