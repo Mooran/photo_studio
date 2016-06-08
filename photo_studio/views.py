@@ -120,18 +120,19 @@ def push_product(request):
     Product.objects.bulk_create(create_obj_list)
     return '商品信息上传成功'
 
+@csrf_exempt
 @jsonapi()
 def get_customer_pick(request):
-    access_path = request.GET.get('access_path','')
+    access_path = request.POST.get('access_path','')
     if not access_path:
         raise ValueError,"缺少链接信息"
+    access_path = access_path[access_path.rindex('/')+1:]
     order_object = Order.objects.filter(access_path=access_path)
     if not order_object:
         raise ValueError,"未找到订单信息"
     order_object = order_object[0]
     unique_id = order_object.unique_id
     pick_info_list = PhotoPick.objects.select_related().filter(unique_id=unique_id)
-    print pick_info_list
     result = []
     product_photo_dict = dict()
     for pick_info in pick_info_list:
@@ -140,7 +141,7 @@ def get_customer_pick(request):
             product_photo_dict[product_id] = {'photo_list':[],'name':pick_info.product.name,'num':pick_info.product.num}
         photo_name = '%s-%s' % (pick_info.photo.scene_name,pick_info.photo.name) if pick_info.photo.scene_name else pick_info.photo.name
         product_photo_dict[product_id]['photo_list'].append(photo_name)
-    print product_photo_dict
+        
     for product_id in product_photo_dict:
         temp_dict = {'product_id':product_id,
                      'name':product_photo_dict[product_id]['name'],
