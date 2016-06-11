@@ -63,7 +63,12 @@ def upload(request):
     name = request.POST.get('img_name')
     scene_name = request.POST.get('scene_name')
     unique_id = request.POST.get('unique_id')
-    file_obj = Photo(unique_id=unique_id,image=img_file,name=name,scene_name=scene_name)
+    existed_photo = Photo.objects.filter(unique_id=unique_id,name=name,scene_name=scene_name)
+    if not existed_photo:
+        file_obj = Photo(unique_id=unique_id,image=img_file,name=name,scene_name=scene_name)
+    else:
+        file_obj = existed_photo[0]
+        file_obj.image = img_file
     file_obj.save()
     return '上传成功'
 

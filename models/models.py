@@ -3,6 +3,12 @@ import os,sys
 from django.db import models
 
 
+
+
+def save_photo(instance,file_name):
+    return 'photo/%s/%s' % (str(instance.unique_id),str(instance.name))
+
+
 class Order(models.Model):
 
     class Meta:
@@ -39,7 +45,8 @@ class Photo(models.Model):
 
     id = models.AutoField(primary_key=True)
     unique_id = models.CharField(max_length=64)
-    image = models.ImageField(upload_to='photo')
+    image = models.ImageField(upload_to=save_photo)
+    # image = models.ImageField(upload_to='photo')
     name = models.CharField(max_length=64)
     scene_name = models.CharField(max_length=64,blank=True,null=True)
 
@@ -54,3 +61,6 @@ class PhotoPick(models.Model):
     product = models.ForeignKey(Product)
     photo = models.ForeignKey(Photo)
     pick_num = models.IntegerField(default=1)
+
+
+
