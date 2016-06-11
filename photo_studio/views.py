@@ -22,10 +22,20 @@ def index(request,access_key):
         return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
     unique_id = order_object[0].unique_id
     product_list = Product.objects.filter(unique_id=unique_id)
-    
+    temp_photo_list = Photo.objects.filter(unique_id=unique_id)
+    pick_photo_list = PhotoPick.objects.filter(unique_id=unique_id)
+    photo_list = []
+    for temp_photo in temp_photo_list:
+        photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
+        checked_product = 0
+        for pick_photo in pick_photo_list:
+            if temp_photo.id == pick_photo.photo_id:
+                checked_product = pick_photo.product_id
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id,'checked_product':checked_product})
     data = locals()
     data['product_list'] = product_list
     data['unique_id'] = unique_id
+    data['photo_list'] = photo_list
     template = get_template('detail.html')
     variables = RequestContext(request,data)
     output = template.render(variables)
