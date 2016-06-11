@@ -22,20 +22,52 @@ def index(request,access_key):
         return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
     unique_id = order_object[0].unique_id
     product_list = Product.objects.filter(unique_id=unique_id)
-    temp_photo_list = Photo.objects.filter(unique_id=unique_id)
-    photo_list = []
-    for temp_photo in temp_photo_list:
-        photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id})
+    
     data = locals()
     data['product_list'] = product_list
     data['unique_id'] = unique_id
-    data['photo_list'] = photo_list
     template = get_template('detail.html')
     variables = RequestContext(request,data)
     output = template.render(variables)
     return HttpResponse(output, content_type='text/html; charset=UTF-8')
 
+@jsonapi()
+def photo_list(request):
+    access_key = request.GET.get('access_key')
+    if not access_key:
+        return '链接不存在'
+    order_object = Order.objects.filter(access_path=access_key)
+    if not order_object:
+        return '订单不存在'
+    unique_id = order_object[0].unique_id
+    temp_photo_list = Photo.objects.filter(unique_id=unique_id)
+    pick_photo_list = PhotoPick.objects.filter(unique_id=unique_id)
+    photo_list = []
+    for temp_photo in temp_photo_list:
+        photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
+        checked_product = 0
+        for pick_photo in pick_photo_list:
+            if temp_photo.id == pick_photo.photo_id:
+                checked_product = pick_photo.product_id
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id,'checked_product':checked_product})
+    return photo_list
+
+@jsonapi()
+def product_list(request):
+    access_key = request.GET.get('access_key')
+    if not access_key:
+        return HttpResponse('链接不存在',content_type='text/html; charset=UTF-8')
+
+    order_object = Order.objects.filter(access_path=access_key)
+    if not order_object:
+        return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
+    unique_id = order_object[0].unique_id
+    temp_product_list = Product.objects.filter(unique_id=unique_id)
+    product_list = []
+    for temp_product in temp_product_list:
+        product = {'name':temp_product.name,'id':temp_product.id}
+        product_list.append(product)
+    return product_list
 
 @csrf_exempt
 @jsonapi()

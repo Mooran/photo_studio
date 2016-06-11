@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^index/(?P<access_key>.*)$', 'photo_studio.views.index', name='index'),
     # url(r'^index$', 'photo_studio.views.index', name='index'),
+    url(r'^photo/list$', 'photo_studio.views.photo_list', name='photo.list'),
+    url(r'^product/list$', 'photo_studio.views.product_list', name='product.list'),
     url(r'^photo/upload$', 'photo_studio.views.upload', name='photo.upload'),
     url(r'^photo/pick$', 'photo_studio.views.pick_photo', name='photo.pick'),
     url(r'^order/push$', 'photo_studio.views.push_order', name='order.push'),
