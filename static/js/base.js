@@ -5,6 +5,8 @@ pic = {
 	},
 	add:function(){
 		var pic_name = "";
+		var check_status;
+		var history_data = $("#history_data").val();
 		var native_data = {};
 		var local_arry = [];
 		var local_ob = {};
@@ -17,6 +19,60 @@ pic = {
 			this.splice(index, 1);
 			}
 		};
+		$(document).ready(function(){
+			var pick_obj,picked_photo;
+			if($(".picked_photos").length>0){
+				$(".picked_photos").each(function(){
+					pick_obj = {};
+					picked_photo = [];
+					$(this).find("span").each(function(){
+						picked_photo.push($(this).data("photolist").toString());
+					})
+					pick_obj.product_id = $(this).data("productid");
+					pick_obj.photo_list = picked_photo;
+					local_arry.push(pick_obj);
+				})
+			}
+			$("#drop1").find("li:first").trigger("click");
+			console.log(local_arry);
+		})
+		// $(document).ready(function(){
+		// 	$('input[data-productid]').each(function(){
+		// 		var that = this;
+		// 		var el_obj,el_photo;
+		// 		var isinside = false;
+		// 		var product_id = $(that).data("productid");
+		// 		if(local_arry.length == 0){
+		// 			el_obj = {};
+		// 			el_photo = [];
+		// 			el_obj.product_id = product_id;
+		// 			el_photo.push($(that).val());
+		// 			el_obj.photo_list = el_photo;
+		// 			local_arry.push(el_obj);
+		// 			isinside = true;
+		// 		}else{
+		// 			$.each(local_arry,function(i,val){
+		// 				if(product_id == val.product_id){
+		// 					val.photo_list.push($(that).val());
+		// 					isinside = true;
+		// 				}
+		// 			})
+		// 		}
+		// 		console.log(isinside)
+		// 		if(isinside){
+		// 			return;
+		// 		}else{
+		// 			el_obj = {};
+		// 			el_photo = [];
+		// 			el_obj.product_id = product_id;
+		// 			el_photo.push($(that).val());
+		// 			el_obj.photo_list = el_photo;
+		// 			local_arry.push(el_obj);
+		// 		}
+		// 		console.log(local_arry)
+		// 	})
+		// 	$("#drop1").find("li:first").trigger("click");
+		// });
 		//查看已选
 		$(".choosed").on("click",function(){
 			$('nav[data-id="choosed"]').show();
@@ -24,12 +80,15 @@ pic = {
 			$(".off-canvas-wrap").removeClass("move-right");
 			$(".rechoose").html("已选照片");
 	        $(".clearing-thumbs").find("li").hide();
+	        $("#second_protype_choose").find("*[data-productid]").removeClass("active");
+	        $("#second_protype_choose").find(".dropdown").find("span").html("查看全部")
 	        $.each(local_arry,function(i,val){
 				$.each(val.photo_list,function(key,item){
 					$(".clearing-thumbs").find('input[value="'+item+'"]').parent().show();
 					$(".clearing-thumbs").find('input[value="'+item+'"]').prop("checked",true);
 				})
 			});
+			check_status = "choosed";
 	    });
 
 	    //查看未选
@@ -39,12 +98,24 @@ pic = {
 			$(".off-canvas-wrap").removeClass("move-right");
 			$(".rechoose").html("未选照片");
 	        $(".clearing-thumbs").find("li").show();
+	        $("#second_protype_choose").find("*[data-productid]").removeClass("active");
+	        $("#second_protype_choose").find(".dropdown").find("span").html("查看全部")
 	        $.each(local_arry,function(i,val){
 				$.each(val.photo_list,function(key,item){
 					$(".clearing-thumbs").find('input[value="'+item+'"]').parent().hide();
 					$(".clearing-thumbs").find('input[value="'+item+'"]').prop("checked",false);
 				})
 			});
+			check_status = "unchoose";
+        });
+
+        $('a[data-productid="all"]').on("click",function(){
+        	event.stopPropagation();
+        	if(check_status == "choosed"){
+        		$(".choosed").trigger("click");
+        	}else if(check_status == "unchoose"){
+        		$(".unchoose").trigger("click");
+        	}
         });
 		//在线选片
         $(".choose_pic").on("click",function(){
@@ -104,9 +175,9 @@ pic = {
         	var str = $(this).text();
         	$("#product_type_choose").find("*[data-productid]").removeClass("active");
         	$(this).find("*[data-productid]").addClass("active");
-        	$(".dropdown").find("span").html(str);
+        	$(this).parent().parent().find(".dropdown").find("span").html(str);
         	$("input").prop("checked",false);
-        	var local_product_id = $(".active").data("productid");
+        	var local_product_id = $("#product_type_choose").find(".active").data("productid");
         	$.each(local_arry,function(i,val){
 				if(val.product_id == local_product_id){
 					$.each(val.photo_list,function(key,item){
@@ -114,6 +185,36 @@ pic = {
 					})
 				}
 			})
+        });
+
+        $("#drop2>li").on("click",function(){
+        	var str = $(this).text();
+        	$("#second_protype_choose").find("*[data-productid]").removeClass("active");
+        	$(this).find("*[data-productid]").addClass("active");
+        	$(this).parent().parent().find(".dropdown").find("span").html(str);
+        	$("input").prop("checked",false);
+        	var local_product_id = $("#second_protype_choose").find(".active").data("productid");
+        	if(check_status == "choosed"){
+        		$('input[type="checkbox"]').parent().hide();
+	        	$.each(local_arry,function(i,val){
+					if(val.product_id == local_product_id){
+						$.each(val.photo_list,function(key,item){
+							$('input[value="'+item+'"]').prop("checked",true);
+							$(".pic_box").find('input[value="'+item+'"]').parent().show();
+						})
+					}
+				})
+        	}else if(check_status == "unchoose"){
+        		$('input[type="checkbox"]').parent().show();
+	        	$.each(local_arry,function(i,val){
+					if(val.product_id == local_product_id){
+						$.each(val.photo_list,function(key,item){
+							$('input[value="'+item+'"]').prop("checked",true);
+							$(".pic_box").find('input[value="'+item+'"]').parent().hide();
+						})
+					}
+				})
+        	}
         });
 
 	    $(".alert-box").find(".close").on("click",function(){

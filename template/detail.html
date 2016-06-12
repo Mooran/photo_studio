@@ -14,6 +14,7 @@
   </head>
   <body>
   <input type="hidden" id="unique_id" value="{{unique_id}}" />
+  <input type="hidden" id="history_data" value="{{pick_photo_list}}" />
   <div class="off-canvas-wrap docs-wrap" data-offcanvas="">
     <div class="inner-wrap">
 
@@ -39,7 +40,7 @@
       </nav>
 
       <nav class="tab-bar" data-id="choosed" style="display: none;">
-        <section class="left tab-bar-section hide-for-small" style="z-index: 1000;">
+        <section class="left tab-bar-section hide-for-small">
           <ul class="inline-list nav_right">
             <li><a href="#" class="unchoose">查看未选</a></li>
             <li><a href="#" class="choosed">查看已选</a></li>
@@ -49,8 +50,15 @@
         <section class="left-small show-for-small">
           <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
         </section>
-        <section class="right tab-bar-section text-center">
-          <span class="rechoose">已选照片</span>
+        <section class="right medium-9 small-12 tab-bar-section text-center" id="second_protype_choose">
+        <a href="#" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span data-productid="all">查看全部</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
+          <ul id="drop2" data-dropdown-content class="f-dropdown" aria-hidden="true">
+              <li><a href="#" data-productid="all">查看全部</a></li>
+            {% for product in product_list %}
+              <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
+            {% endfor %}
+          </ul>
+          <!-- <span class="rechoose">已选照片</span> -->
         </section>
       </nav>
 
@@ -66,6 +74,13 @@
         <div class="large-12 columns">
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
+            <!-- {% for photo in photo_list %}
+            {% if photo.checked_product != 0 %}
+              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" checked="true" data-productid="{{photo.checked_product}}" value="{{photo.id}}" name="pic_id" /></li>
+            {% else %}
+              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" /></li>
+            {% endif %}
+            {% endfor %} -->
             {% for photo in photo_list %}
               <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" /></li>
             {% endfor %}
@@ -77,6 +92,13 @@
     </div>
   </div>
   <br>
+  {% for product in pick_photo_list %}
+    <div style="display: none" data-productid="{{product.product_id}}" class="picked_photos">
+    {% for photo in product.photo_list %}
+      <span data-photolist="{{photo}}"></span>
+    {% endfor %}
+    </div>
+  {% endfor %}
 
     <a href="#" class="button expand" id="save">保存</a>
     <div data-alert class="alert-box success radius">
