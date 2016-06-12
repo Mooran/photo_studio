@@ -6,6 +6,8 @@ from django.db import models
 
 
 def save_photo(instance,file_name):
+    if instance.scene_name:
+        return 'photo/%s/%s/%s' % (str(instance.unique_id),str(instance.scene_name),str(instance.name))
     return 'photo/%s/%s' % (str(instance.unique_id),str(instance.name))
 
 
