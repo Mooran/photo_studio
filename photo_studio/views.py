@@ -32,7 +32,14 @@ def index(request,access_key):
     data['product_list'] = product_list
     data['unique_id'] = unique_id
     data['photo_list'] = photo_list
-    data['pick_photo_list'] = [{'product_id':item.product_id,'photo_id':item.photo_id} for item in pick_photo_list]
+    product_pick_dict = {}
+    for pick_photo in pick_photo_list:
+        product_id = pick_photo.product_id
+        if product_id not in product_pick_dict:
+            product_pick_dict[product_id] = []
+        product_pick_dict[product_id].append(pick_photo.photo_id)
+    data['pick_photo_list'] = [{'product_id':product_id,'photo_list':product_pick_dict[product_id]} for product_id in product_pick_dict]
+    print data['pick_photo_list']
     template = get_template('detail.html')
     variables = RequestContext(request,data)
     output = template.render(variables)
