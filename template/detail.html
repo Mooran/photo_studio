@@ -74,13 +74,6 @@
         <div class="large-12 columns">
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
-            <!-- {% for photo in photo_list %}
-            {% if photo.checked_product != 0 %}
-              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" checked="true" data-productid="{{photo.checked_product}}" value="{{photo.id}}" name="pic_id" /></li>
-            {% else %}
-              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" /></li>
-            {% endif %}
-            {% endfor %} -->
             {% for photo in photo_list %}
               <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" /></li>
             {% endfor %}
