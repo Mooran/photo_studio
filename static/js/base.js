@@ -81,7 +81,7 @@ pic = {
 			$(".rechoose").html("已选照片");
 	        $(".clearing-thumbs").find("li").hide();
 	        $("#second_protype_choose").find("*[data-productid]").removeClass("active");
-	        $("#second_protype_choose").find(".dropdown").find("span").html("查看全部")
+	        $("#second_protype_choose").find(".dropdown").find("span").html("全部已选")
 	        $.each(local_arry,function(i,val){
 				$.each(val.photo_list,function(key,item){
 					$(".clearing-thumbs").find('input[value="'+item+'"]').parent().show();
@@ -99,7 +99,7 @@ pic = {
 			$(".rechoose").html("未选照片");
 	        $(".clearing-thumbs").find("li").show();
 	        $("#second_protype_choose").find("*[data-productid]").removeClass("active");
-	        $("#second_protype_choose").find(".dropdown").find("span").html("查看全部")
+	        $("#second_protype_choose").find(".dropdown").find("span").html("全部未选")
 	        $.each(local_arry,function(i,val){
 				$.each(val.photo_list,function(key,item){
 					$(".clearing-thumbs").find('input[value="'+item+'"]').parent().hide();
