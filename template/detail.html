@@ -51,9 +51,9 @@
           <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
         </section>
         <section class="right medium-9 small-12 tab-bar-section text-center" id="second_protype_choose">
-        <a href="#" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span data-productid="all">查看全部</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
+        <a href="#" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span data-productid="all">全部已选</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
           <ul id="drop2" data-dropdown-content class="f-dropdown" aria-hidden="true">
-              <li><a href="#" data-productid="all">查看全部</a></li>
+              <li><a href="#" data-productid="all">全部已选</a></li>
             {% for product in product_list %}
               <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
             {% endfor %}
@@ -104,10 +104,10 @@
     </div>
 
     <script src="/static/js/vendor/jquery.js"></script>
-    <script src="/static/js/foundation.min.js"></script>
+    <script src="/static/js/foundation.min.js?v=1.0.0"></script>
     <script>
       $(document).foundation();
     </script>
-    <script src="/static/js/base.js?v=1.0.0"></script>
+    <script src="/static/js/base.js?v=1.0.1"></script>
   </body>
 </html>

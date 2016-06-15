@@ -14,7 +14,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 .inline-list > li > *{font-size: 16px;margin-right: 6px;line-height: 40px;}
 .top-bar-section li:not(.has-form) a:not(.button){background: #1450B8}
 .clearing-thumbs li{position: relative;padding: 5px;border: solid 1px #ededed}
-.clearing-thumbs input{position: absolute;right: 10px;top: 10px;width: 20px;height: 20px;}
+.clearing-thumbs input{position: absolute;right: 10px;top: 10px;width: 30px;height: 30px;}
 .add_pic{font-size: 15px;padding: 0 10px;}
 .clearing-thumbs li:hover{box-shadow: 1px 1px 8px #999}
 .top-bar.expanded .title-area{background: #1450B8}
@@ -42,3 +42,4 @@ ul{margin-bottom: 0;line-height: 3.6}
 
 .tiny_button {padding-top: 0.125rem;padding-right: 0.25rem;padding-bottom: 0.1875rem;padding-left: 0.25rem;font-size: 0.1875rem; }
 .product_select{width:15%;}
+.clearing-close {font-size:40px;padding-top:15px;}

@@ -134,6 +134,16 @@ pic = {
 			})
         });
 
+        $(".pic_box").on("click",function(){
+            if($(".off-canvas-wrap").hasClass("move-right")){
+                $(".off-canvas-wrap").removeClass("move-right");  
+                event.stopPropagation();
+                event.preventDefault();    
+            }
+            
+
+        })
+
 		$('input[name="pic_id"]').on("click",function(){
 			event.stopPropagation();
 			var that = this;
