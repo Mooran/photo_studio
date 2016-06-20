@@ -13,7 +13,7 @@ from models.models import *
 
 
 @gzip_page
-def index(request,access_key):
+def photo_index(request,access_key):
     if not access_key:
         return HttpResponse('链接不存在',content_type='text/html; charset=UTF-8')
 
@@ -21,6 +21,31 @@ def index(request,access_key):
     if not order_object:
         return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
     unique_id = order_object[0].unique_id
+    data = locals()
+    data = get_photo_data(unique_id)
+    template = get_template('detail.html')
+    variables = RequestContext(request,data)
+    output = template.render(variables)
+    return HttpResponse(output, content_type='text/html; charset=UTF-8')
+
+
+@gzip_page
+def sample_index(request,access_key):
+    if not access_key:
+        return HttpResponse('链接不存在',content_type='text/html; charset=UTF-8')
+
+    order_object = Order.objects.filter(access_path=access_key)
+    if not order_object:
+        return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
+    unique_id = order_object[0].unique_id
+    data = get_sample_data(unique_id)
+    template = get_template('detail.html')
+    variables = RequestContext(request,data)
+    output = template.render(variables)
+    return HttpResponse(output, content_type='text/html; charset=UTF-8')
+
+def get_photo_data(unique_id):
+    data = locals()
     product_list = Product.objects.filter(unique_id=unique_id)
     temp_photo_list = Photo.objects.filter(unique_id=unique_id)
     pick_photo_list = PhotoPick.objects.filter(unique_id=unique_id)
@@ -28,7 +53,6 @@ def index(request,access_key):
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
         photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id})
-    data = locals()
     data['product_list'] = product_list
     data['unique_id'] = unique_id
     data['photo_list'] = photo_list
@@ -39,45 +63,26 @@ def index(request,access_key):
             product_pick_dict[product_id] = []
         product_pick_dict[product_id].append(pick_photo.photo_id)
     data['pick_photo_list'] = [{'product_id':product_id,'photo_list':product_pick_dict[product_id]} for product_id in product_pick_dict]
-    print data['pick_photo_list']
-    template = get_template('detail.html')
-    variables = RequestContext(request,data)
-    output = template.render(variables)
-    return HttpResponse(output, content_type='text/html; charset=UTF-8')
+    return data
 
-@jsonapi()
-def photo_list(request):
-    access_key = request.GET.get('access_key')
-    if not access_key:
-        return '链接不存在'
-    order_object = Order.objects.filter(access_path=access_key)
-    if not order_object:
-        return '订单不存在'
-    unique_id = order_object[0].unique_id
+def get_sample_data(unique_id):
+    data = locals()
     temp_photo_list = Photo.objects.filter(unique_id=unique_id)
-    pick_photo_list = PhotoPick.objects.filter(unique_id=unique_id)
+    pick_sample_list = SamplePick.objects.filter(unique_id=unique_id)
     photo_list = []
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id})
-    return photo_list
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id,'modify':1,'modify_note':''})
 
-@jsonapi()
-def product_list(request):
-    access_key = request.GET.get('access_key')
-    if not access_key:
-        return HttpResponse('链接不存在',content_type='text/html; charset=UTF-8')
+    for photo in photo_list:
+        for pick_sample in pick_sample_list:
+            if pick_sample.photo.id == photo.get('id'):
+                photo['modify'] = pick_sample.modify
+                photo['modify_note'] = pick_sample.modify_note
+    data['photo_list'] = photo_list
+    data['unique_id'] = unique_id
+    return data
 
-    order_object = Order.objects.filter(access_path=access_key)
-    if not order_object:
-        return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
-    unique_id = order_object[0].unique_id
-    temp_product_list = Product.objects.filter(unique_id=unique_id)
-    product_list = []
-    for temp_product in temp_product_list:
-        product = {'name':temp_product.name,'id':temp_product.id}
-        product_list.append(product)
-    return product_list
 
 @csrf_exempt
 @jsonapi()
@@ -97,6 +102,24 @@ def pick_photo(request):
     PhotoPick.objects.bulk_create(create_obj_list)
     return '保存成功'
 
+
+@csrf_exempt
+@jsonapi()
+def pick_sample(request):
+    unique_id = request.POST.get('unique_id','')
+    sample_list = request.POST.get('photo_list')
+    sample_list = json.loads(sample_list)
+    pick_sample = SamplePick.objects.filter(unique_id=unique_id)
+    if pick_sample:
+        pick_sample.delete()
+    create_obj_list = []
+    for sample in sample_list:
+        photo_id = sample.get('photo_id')
+        modify = sample.get('modify')
+        modify_note = sample.get('modify_note','')
+        create_obj_list.append(SamplePick(unique_id=unique_id,modify=modify,photo_id=photo_id,modify_note=modify_note))
+    SamplePick.objects.bulk_create(create_obj_list)
+    return '保存成功'
 
 @csrf_exempt
 @jsonapi()
@@ -124,6 +147,7 @@ def push_order(request):
     order_num = request.POST.get('order_num')
     if not order_num:
         raise ValueError,"缺少订单编号"
+    source = request.POST.get('source','')
     customer_name = request.POST.get('customer_name','')
     customer_phone = request.POST.get('customer_phone','')
     studio_name = request.POST.get('studio_name','')
@@ -132,7 +156,7 @@ def push_order(request):
     pre_path_str = '%s%s' % (unique_id,int(time.time()))
     access_path = hashlib.md5(pre_path_str).hexdigest()
     Order(unique_id=unique_id,order_num=order_num,customer_name=customer_name,customer_phone=customer_phone,studio_name=studio_name,studio_phone=studio_phone,scene_name=scene_name,access_path=access_path).save()
-    return '/index/%s' % access_path
+    return '/index/photo/%s' % access_path if not source else 'index/sample/%s' % access_path
 
 
 @csrf_exempt
@@ -169,7 +193,7 @@ def push_product(request):
 
 @csrf_exempt
 @jsonapi()
-def get_customer_pick(request):
+def get_photo_pick(request):
     access_path = request.POST.get('access_path','')
     if not access_path:
         raise ValueError,"缺少链接信息"
@@ -195,5 +219,29 @@ def get_customer_pick(request):
                      'num':product_photo_dict[product_id]['num'],
                      'photo_list':'|'.join(product_photo_dict[product_id]['photo_list'])
                     }
+        result.append(temp_dict)
+    return result
+
+
+@csrf_exempt
+@jsonapi()
+def get_sample_pick(request):
+    access_path = request.POST.get('access_path','')
+    if not access_path:
+        raise ValueError,"缺少链接信息"
+    access_path = access_path[access_path.rindex('/')+1:]
+    order_object = Order.objects.filter(access_path=access_path)
+    if not order_object:
+        raise ValueError,"未找到订单信息"
+    order_object = order_object[0]
+    unique_id = order_object.unique_id
+    pick_sample_list = SamplePick.objects.select_related().filter(unique_id=unique_id)
+    result = []
+    for pick_sample in pick_sample_list:
+        temp_dict = dict()
+        photo_name = '%s-%s' % (pick_sample.photo.scene_name,pick_sample.photo.name) if pick_sample.photo.scene_name else pick_sample.photo.name
+        temp_dict['photo_name'] = photo_name
+        temp_dict['modify'] = pick_sample.modify
+        temp_dict['modify_note'] = pick_sample.modify_note
         result.append(temp_dict)
     return result
