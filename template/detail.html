@@ -75,7 +75,7 @@
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
             {% for photo in photo_list %}
-              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" /></li>
+              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" id="{{photo.id}}" /><label for="{{photo.id}}"></label></li>
             {% endfor %}
             </ul>
           </section>

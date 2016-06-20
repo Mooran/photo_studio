@@ -90,7 +90,16 @@ pic = {
 			});
 			check_status = "choosed";
 	    });
-
+		$(".clearing-thumbs").on("click","label",function(){
+			event.stopPropagation();
+			if($(this).status==0){
+				$(this).data("status",1);
+				$(this).parent().addClass("selected");
+			}else{
+				$(this).data("status",0);
+				$(this).parent().removeClass("selected");
+			}
+		});
 	    //查看未选
 		$(".unchoose").on("click",function(){
 	      	$('nav[data-id="choosed"]').show();
