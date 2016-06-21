@@ -41,6 +41,17 @@ CREATE TABLE `photo_pick` (
   `photo_id` int(11) NOT NULL,
   `pick_num` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `photo_pick_bb420c12` (`product_id`),
-  KEY `photo_pick_7c6c8bb1` (`photo_id`)
+  KEY `photo_pick_product_id` (`product_id`),
+  KEY `photo_pick_photo_id` (`photo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `sample_pick` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unique_id` varchar(64) NOT NULL,
+  `photo_id` int(11) NOT NULL,
+  `modify` tinyint(2) NOT NULL DEFAULT 1 COMMENT '1已确认，2待修改',
+  `modify_note` varchar(1024) NULL DEFAULT NULL COMMENT '修改意见',
+  PRIMARY KEY (`id`),
+  KEY `sample_pick_unique_id` (`unique_id`),
+  KEY `sample_pick_photo_id` (`photo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

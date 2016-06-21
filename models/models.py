@@ -65,4 +65,16 @@ class PhotoPick(models.Model):
     pick_num = models.IntegerField(default=1)
 
 
+class SamplePick(models.Model):
+
+    class Meta:
+        db_table = 'sample_pick'
+
+    id = models.AutoField(primary_key=True)
+    unique_id = models.CharField(max_length=64)
+    photo = models.ForeignKey(Photo)
+    modify = models.IntegerField(default=1)
+    modify_note = models.CharField(max_length=1024,blank=True,null=True,default='')
+
+
 
