@@ -39,7 +39,7 @@ def sample_index(request,access_key):
         return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
     unique_id = order_object[0].unique_id
     data = get_sample_data(unique_id)
-    template = get_template('detail.html')
+    template = get_template('sample.html')
     variables = RequestContext(request,data)
     output = template.render(variables)
     return HttpResponse(output, content_type='text/html; charset=UTF-8')

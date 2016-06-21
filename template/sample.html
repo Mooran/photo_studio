@@ -1,0 +1,122 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>在线选片</title>
+    <link rel="stylesheet" href="/static/css/foundation.css" />
+    <link rel="stylesheet" href="/static/css/foundation-icons/foundation-icons.css" />
+    <link rel="stylesheet" href="/static/css/ui-dialog.css" />
+    <link rel="stylesheet" href="/static/css/base.css?v=1.0.1" />
+    <script src="/static/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+  <input type="hidden" id="unique_id" value="{{unique_id}}" />
+  <input type="hidden" id="history_data" value="{{pick_photo_list}}" />
+  <div class="off-canvas-wrap docs-wrap" data-offcanvas="">
+    <div class="inner-wrap">
+
+      <nav class="tab-bar" data-id="prodect_list">
+        <section class="left-small show-for-small">
+          <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
+        </section>
+        <section class="right tab-bar-section hide-for-small">
+          <ul class="inline-list nav_right">
+            <li><a href="#" class="unchoose">查看未选</a></li>
+            <li><a href="#" class="choosed">查看已选</a></li>
+            <li><a href="#" class="choose_pic">在线选片</a></li>
+          </ul>
+        </section>
+        <section class="columns small-9 middle tab-bar-section" id="product_type_choose">
+          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span class="active" data-productid="{{product_list.0.id}}">{{product_list.0.name}}</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
+          <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+            {% for product in product_list %}
+              <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+      </nav>
+
+      <nav class="tab-bar" data-id="choosed" style="display: none;">
+        <section class="left tab-bar-section hide-for-small">
+          <ul class="inline-list nav_right">
+            <li><a href="#" class="unchoose">查看未选</a></li>
+            <li><a href="#" class="choosed">查看已选</a></li>
+            <li><a href="#" class="choose_pic">在线选片</a></li>
+          </ul>
+        </section>
+        <section class="left-small show-for-small">
+          <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a><br>
+        </section>
+        <section class="right medium-9 small-12 tab-bar-section text-center" id="second_protype_choose">
+        <a href="#" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span data-productid="all">全部已选</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
+          <ul id="drop2" data-dropdown-content class="f-dropdown" aria-hidden="true">
+              <li><a href="#" data-productid="all">全部已选</a></li>
+            {% for product in product_list %}
+              <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
+            {% endfor %}
+          </ul>
+          <!-- <span class="rechoose">已选照片</span> -->
+        </section>
+      </nav>
+
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li><a href="#" class="choose_pic">在线选片</a></li>
+          <li><a href="#" class="choosed">查看已选</a></li>
+          <li><a href="#" class="unchoose">查看未选</a></li>
+        </ul>
+      </aside>
+    <section class="main-section">
+      <div class="">
+        <div class="large-12 columns">
+          <section class="pic_box">
+            <ul class="clearing-thumbs" data-clearing>
+            {% for photo in photo_list %}
+            <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}">
+              <a href="{{photo.url}}"><img src="{{photo.url}}"  /></a>
+              <p class="text-left"><span data-name="{{photo.name}}">{{photo.name}}</span></p>
+              <select type="checkbox" value="" name="pic_id">
+                <option value="1">确认选择</option>
+                <option value="2">有待修改</option>
+              </select>
+            </li>
+            {% endfor %}
+            </ul>
+          </section>
+        </div>
+      </div>
+    </section>
+    </div>
+  </div>
+  <br>
+  {% for product in pick_photo_list %}
+    <div style="display: none" data-productid="{{product.product_id}}" class="picked_photos">
+    {% for photo in product.photo_list %}
+      <span data-photolist="{{photo}}"></span>
+    {% endfor %}
+    </div>
+  {% endfor %}
+
+    <a href="#" class="button expand" id="save">保存</a>
+    <div data-alert class="alert-box success radius">
+      保存成功
+      <a href="#" class="close">&times;</a>
+    </div>
+    <div data-alert class="alert-box alert radius">
+      请求失败
+      <a href="#" class="close">&times;</a>
+    </div>
+
+    <script src="/static/js/vendor/jquery.js"></script>
+    <script src="/static/js/foundation.min.js?v=1.0.0"></script>
+    <script src="/static/js/dialog-season-plus-min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    <script src="/static/js/sample.js?v=1.0.1"></script>
+  </body>
+</html>
