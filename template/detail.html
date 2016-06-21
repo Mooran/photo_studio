@@ -73,9 +73,9 @@
       <div class="">
         <div class="large-12 columns">
           <section class="pic_box">
-            <ul class="clearing-thumbs" data-clearing>
+            <ul class="clearing-thumbs">
             {% for photo in photo_list %}
-              <li class="small-12 medium-3 large-2"><a href="{{photo.url}}"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p><input type="checkbox" value="{{photo.id}}" name="pic_id" id="{{photo.id}}" /><label for="{{photo.id}}"></label></li>
+              <li class="small-12 medium-3 large-2"><input type="checkbox" value="{{photo.id}}" name="pic_id" id="{{photo.id}}" /><a href="javascipt:;"><img src="{{photo.url}}"  /></a><p class="text-center"><span data-name="{{photo.name}}">{{photo.name}}</span></p></li>
             {% endfor %}
             </ul>
           </section>

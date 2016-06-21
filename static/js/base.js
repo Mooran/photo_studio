@@ -90,16 +90,6 @@ pic = {
 			});
 			check_status = "choosed";
 	    });
-		$(".clearing-thumbs").on("click","label",function(){
-			event.stopPropagation();
-			if($(this).status==0){
-				$(this).data("status",1);
-				$(this).parent().addClass("selected");
-			}else{
-				$(this).data("status",0);
-				$(this).parent().removeClass("selected");
-			}
-		});
 	    //查看未选
 		$(".unchoose").on("click",function(){
 	      	$('nav[data-id="choosed"]').show();
@@ -126,6 +116,9 @@ pic = {
         		$(".unchoose").trigger("click");
         	}
         });
+        $(".clearing-thumbs").find("li").on("click",function(){
+        	$(this).find("input").trigger("click");
+        });
 		//在线选片
         $(".choose_pic").on("click",function(){
         	var local_product_id = $(".active").data("productid");
@@ -149,9 +142,8 @@ pic = {
                 event.stopPropagation();
                 event.preventDefault();    
             }
-            
+        });
 
-        })
 
 		$('input[name="pic_id"]').on("click",function(){
 			event.stopPropagation();

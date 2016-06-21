@@ -9,17 +9,15 @@ ul{margin-bottom: 0;line-height: 3.6}
 .top-bar{background: #1450B8}
 .tab-bar{background: #1450B8}
 .nav_right>li>a{color: #fff}
+.clearing-thumbs input[type=checkbox]:checked+a>img{border: solid 2px blue;border-radius: 22px;}
 .clear_padding{padding: 0!important}
 .clearing-thumbs li{margin-right: 0}
 .inline-list > li > *{font-size: 16px;margin-right: 6px;line-height: 40px;}
 .top-bar-section li:not(.has-form) a:not(.button){background: #1450B8}
 .clearing-thumbs li{position: relative;padding: 5px;border: solid 1px #ededed;margin-bottom: 10px;}
-.clearing-thumbs input{position: absolute;right: 10px;top: 10px;width: 0px;height: 20px;}
+.clearing-thumbs input{position: absolute;left: 50px;bottom: -8px;width: 20px;height: 20px;}
 .add_pic{font-size: 15px;padding: 0 10px;}
 .clearing-thumbs li:hover{box-shadow: 1px 1px 8px #999}
-.clearing-thumbs label{display: block;position: absolute;top: 6px;right: -9px;color: red;width: 40px;height: 40px;background: transparent;border-radius: 29px;border: 1px solid #fff;}
-.clearing-thumbs input[type=checkbox]+label:after{content: "√";color: #fff;font-size: 30px;position: absolute;top: -2px;left: 8px;}
-.clearing-thumbs input[type=checkbox]:checked+label{background: green;}
 .top-bar.expanded .title-area{background: #1450B8}
 .dropdown li>a:hover{background: #1450B8}
 .pic_box .th img{height: 220px;}
@@ -40,9 +38,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 @media only screen and (max-width: 40.063em){
 .clearing-assembled .clearing-container .carousel > ul {display: inline-block;}
 .clearing-blackout .clearing-thumbs input{position: fixed;visibility: hidden;}
-.clearing-blackout .clearing-thumbs label{position: fixed;visibility: hidden;}
 .clearing-blackout .clearing-thumbs>.visible input{z-index: 1000;top: 13px;visibility: visible;}
-.clearing-blackout .clearing-thumbs>.visible label{z-index: 1100;visibility: visible;}
 }
 
 .tiny_button {padding-top: 0.125rem;padding-right: 0.25rem;padding-bottom: 0.1875rem;padding-left: 0.25rem;font-size: 0.1875rem; }
