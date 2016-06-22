@@ -165,6 +165,7 @@ pic = {
 					    },
 					    cancelValue:'取消',
 					    cancel:function(){
+					    	dialog.close().remove();
 					    	$(that).val(old_status);
 					    }
 					});
@@ -266,14 +267,19 @@ pic = {
 				      			error:function(res){
 				      				$(".alert-box.alert").fadeIn();
 				      			}
-				      		})
+				      		});
+				      		d.close().remove();
 					    },
 					    cancelValue:'取消',
-					    cancel:function(){}
+					    cancel:function(){
+					    	d.close().remove();
+					    }
 					}).show();
 			    },
 			    cancelValue:'取消',
-			    cancel:function(){}
+			    cancel:function(){
+			    	d.close().remove();
+			    }
 			});
 			d.showModal();
       	});
