@@ -25,6 +25,7 @@ class Order(models.Model):
     studio_phone = models.CharField(max_length=32,blank=True)
     scene_name = models.CharField(max_length=64,blank=True)
     access_path = models.CharField(max_length=64,blank=True)
+    modify_note = models.CharField(max_length=1024,blank=True,null=True,default='')
 
 
 

@@ -108,6 +108,7 @@ def pick_photo(request):
 def pick_sample(request):
     unique_id = request.POST.get('unique_id','')
     sample_list = request.POST.get('photo_list')
+    modify_note = request.POST.get('lastrequire','')
     sample_list = json.loads(sample_list)
     pick_sample = SamplePick.objects.filter(unique_id=unique_id)
     if pick_sample:
@@ -119,6 +120,9 @@ def pick_sample(request):
         modify_note = sample.get('modify_note','')
         create_obj_list.append(SamplePick(unique_id=unique_id,modify=modify,photo_id=photo_id,modify_note=modify_note))
     SamplePick.objects.bulk_create(create_obj_list)
+    order = Order.objects.get(unique_id=unique_id)
+    order.modify_note = modify_note
+    order.save()
     return '保存成功'
 
 @csrf_exempt
@@ -236,12 +240,12 @@ def get_sample_pick(request):
     order_object = order_object[0]
     unique_id = order_object.unique_id
     pick_sample_list = SamplePick.objects.select_related().filter(unique_id=unique_id)
-    result = []
+    result = {'genral_require':order.modify_note,'sample_list':[]}
     for pick_sample in pick_sample_list:
         temp_dict = dict()
         photo_name = '%s-%s' % (pick_sample.photo.scene_name,pick_sample.photo.name) if pick_sample.photo.scene_name else pick_sample.photo.name
         temp_dict['photo_name'] = photo_name
         temp_dict['modify'] = pick_sample.modify
         temp_dict['modify_note'] = pick_sample.modify_note
-        result.append(temp_dict)
+        result['sample_list'].append(temp_dict)
     return result

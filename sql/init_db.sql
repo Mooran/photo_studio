@@ -29,6 +29,7 @@ CREATE TABLE `order` (
   `studio_phone` varchar(32) NOT NULL,
   `scene_name` varchar(64) NOT NULL,
   `access_path` varchar(64) NOT NULL,
+  `modify_note` varchar(1024) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`unique_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
