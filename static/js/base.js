@@ -36,43 +36,6 @@ pic = {
 			$("#drop1").find("li:first").trigger("click");
 			console.log(local_arry);
 		})
-		// $(document).ready(function(){
-		// 	$('input[data-productid]').each(function(){
-		// 		var that = this;
-		// 		var el_obj,el_photo;
-		// 		var isinside = false;
-		// 		var product_id = $(that).data("productid");
-		// 		if(local_arry.length == 0){
-		// 			el_obj = {};
-		// 			el_photo = [];
-		// 			el_obj.product_id = product_id;
-		// 			el_photo.push($(that).val());
-		// 			el_obj.photo_list = el_photo;
-		// 			local_arry.push(el_obj);
-		// 			isinside = true;
-		// 		}else{
-		// 			$.each(local_arry,function(i,val){
-		// 				if(product_id == val.product_id){
-		// 					val.photo_list.push($(that).val());
-		// 					isinside = true;
-		// 				}
-		// 			})
-		// 		}
-		// 		console.log(isinside)
-		// 		if(isinside){
-		// 			return;
-		// 		}else{
-		// 			el_obj = {};
-		// 			el_photo = [];
-		// 			el_obj.product_id = product_id;
-		// 			el_photo.push($(that).val());
-		// 			el_obj.photo_list = el_photo;
-		// 			local_arry.push(el_obj);
-		// 		}
-		// 		console.log(local_arry)
-		// 	})
-		// 	$("#drop1").find("li:first").trigger("click");
-		// });
 		//查看已选
 		$(".choosed").on("click",function(){
 			$('nav[data-id="choosed"]').show();

@@ -25,22 +25,14 @@
         </section>
         <section class="right tab-bar-section hide-for-small">
           <ul class="inline-list nav_right">
-            <li><a href="#" class="unchoose">查看未选</a></li>
-            <li><a href="#" class="choosed">查看已选</a></li>
-            <li><a href="#" class="choose_pic">在线选片</a></li>
-          </ul>
-        </section>
-        <section class="columns small-9 middle tab-bar-section" id="product_type_choose">
-          <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span class="active" data-productid="{{product_list.0.id}}">{{product_list.0.name}}</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
-          <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-            {% for product in product_list %}
-              <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
-            {% endfor %}
+            <li><a href="#" class="unchoose">查看待修改</a></li>
+            <li><a href="#" class="choosed">查看已确认</a></li>
+            <li><a href="#" class="choose_pic">查看全部</a></li>
           </ul>
         </section>
       </nav>
 
-      <nav class="tab-bar" data-id="choosed" style="display: none;">
+      <!-- <nav class="tab-bar" data-id="choosed" style="display: none;">
         <section class="left tab-bar-section hide-for-small">
           <ul class="inline-list nav_right">
             <li><a href="#" class="unchoose">查看未选</a></li>
@@ -59,15 +51,14 @@
               <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
             {% endfor %}
           </ul>
-          <!-- <span class="rechoose">已选照片</span> -->
         </section>
-      </nav>
+      </nav> -->
 
       <aside class="left-off-canvas-menu">
         <ul class="off-canvas-list">
-          <li><a href="#" class="choose_pic">在线选片</a></li>
-          <li><a href="#" class="choosed">查看已选</a></li>
-          <li><a href="#" class="unchoose">查看未选</a></li>
+          <li><a href="#" class="choose_pic">查看全部</a></li>
+          <li><a href="#" class="choosed">查看已确认</a></li>
+          <li><a href="#" class="unchoose">查看待修改</a></li>
         </ul>
       </aside>
     <section class="main-section">
@@ -76,10 +67,10 @@
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
             {% for photo in photo_list %}
-            <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}">
+            <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}" data-photoname="{{photo.name}}">
               <a href="{{photo.url}}"><img src="{{photo.url}}"  /></a>
               <p class="text-left"><span data-name="{{photo.name}}">{{photo.name}}</span></p>
-              <select type="checkbox" value="" name="pic_id">
+              <select value="1" name="pic_id" data-name="{{photo.name}}">
                 <option value="1">确认选择</option>
                 <option value="2">有待修改</option>
               </select>
@@ -114,6 +105,7 @@
     <script src="/static/js/vendor/jquery.js"></script>
     <script src="/static/js/foundation.min.js?v=1.0.0"></script>
     <script src="/static/js/dialog-season-plus-min.js"></script>
+    <script src="/static/js/fall.js"></script>
     <script>
       $(document).foundation();
     </script>

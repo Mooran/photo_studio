@@ -3,7 +3,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 .inline-list{margin-bottom: 0}
 .title{border-bottom: solid 1px #ededed;overflow: hidden;}
 .pic_box{margin-top: 20px}
-.pic_box p{margin-bottom: 0;line-height: 30px;color: #666}
+.pic_box p{margin-bottom: 0;line-height: 30px;color: #666;width: 80%;}
 .pic_box p span{font-size: 16px}
 .inline-list > li{float: right;}
 .top-bar{background: #1450B8}
