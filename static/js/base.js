@@ -36,43 +36,6 @@ pic = {
 			$("#drop1").find("li:first").trigger("click");
 			console.log(local_arry);
 		})
-		// $(document).ready(function(){
-		// 	$('input[data-productid]').each(function(){
-		// 		var that = this;
-		// 		var el_obj,el_photo;
-		// 		var isinside = false;
-		// 		var product_id = $(that).data("productid");
-		// 		if(local_arry.length == 0){
-		// 			el_obj = {};
-		// 			el_photo = [];
-		// 			el_obj.product_id = product_id;
-		// 			el_photo.push($(that).val());
-		// 			el_obj.photo_list = el_photo;
-		// 			local_arry.push(el_obj);
-		// 			isinside = true;
-		// 		}else{
-		// 			$.each(local_arry,function(i,val){
-		// 				if(product_id == val.product_id){
-		// 					val.photo_list.push($(that).val());
-		// 					isinside = true;
-		// 				}
-		// 			})
-		// 		}
-		// 		console.log(isinside)
-		// 		if(isinside){
-		// 			return;
-		// 		}else{
-		// 			el_obj = {};
-		// 			el_photo = [];
-		// 			el_obj.product_id = product_id;
-		// 			el_photo.push($(that).val());
-		// 			el_obj.photo_list = el_photo;
-		// 			local_arry.push(el_obj);
-		// 		}
-		// 		console.log(local_arry)
-		// 	})
-		// 	$("#drop1").find("li:first").trigger("click");
-		// });
 		//查看已选
 		$(".choosed").on("click",function(){
 			$('nav[data-id="choosed"]').show();
@@ -90,16 +53,6 @@ pic = {
 			});
 			check_status = "choosed";
 	    });
-		$(".clearing-thumbs").on("click","label",function(){
-			event.stopPropagation();
-			if($(this).status==0){
-				$(this).data("status",1);
-				$(this).parent().addClass("selected");
-			}else{
-				$(this).data("status",0);
-				$(this).parent().removeClass("selected");
-			}
-		});
 	    //查看未选
 		$(".unchoose").on("click",function(){
 	      	$('nav[data-id="choosed"]').show();
@@ -126,6 +79,9 @@ pic = {
         		$(".unchoose").trigger("click");
         	}
         });
+        $(".clearing-thumbs").find("li").on("click",function(){
+        	$(this).find("input").trigger("click");
+        });
 		//在线选片
         $(".choose_pic").on("click",function(){
         	var local_product_id = $(".active").data("productid");
@@ -149,9 +105,17 @@ pic = {
                 event.stopPropagation();
                 event.preventDefault();    
             }
-            
-
-        })
+        });
+        $(".fixedtool-7").on("touchstart",function(){
+            $(this).css("background","orange");
+            $(this).find("strong").css("color","#fff");
+            $(this).find(".tb-icon").css("color","#fff");
+        });
+        $(".fixedtool-7").on("touchend",function(){
+            $(this).css("background","#ededed");
+            $(this).find("strong").css("color","#000");
+            $(this).find(".tb-icon").css("color","#999");
+        });
 
 		$('input[name="pic_id"]').on("click",function(){
 			event.stopPropagation();

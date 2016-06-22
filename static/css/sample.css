@@ -3,19 +3,18 @@ ul{margin-bottom: 0;line-height: 3.6}
 .inline-list{margin-bottom: 0}
 .title{border-bottom: solid 1px #ededed;overflow: hidden;}
 .pic_box{margin-top: 20px}
-.pic_box p{margin-bottom: 0;line-height: 30px;color: #666;width: 50%;}
+.pic_box p{margin-bottom: 0;line-height: 30px;color: #666}
 .pic_box p span{font-size: 16px}
 .inline-list > li{float: right;}
 .top-bar{background: #1450B8}
 .tab-bar{background: #1450B8}
 .nav_right>li>a{color: #fff}
-.clearing-thumbs input[type=checkbox]:checked+a>img{border: solid 2px blue;border-radius: 22px;}
 .clear_padding{padding: 0!important}
 .clearing-thumbs li{margin-right: 0}
 .inline-list > li > *{font-size: 16px;margin-right: 6px;line-height: 40px;}
 .top-bar-section li:not(.has-form) a:not(.button){background: #1450B8}
-.clearing-thumbs li{position: relative;padding: 5px;border: solid 1px #ededed;margin-bottom: 10px;}
-.clearing-thumbs input{position: absolute;right: 95px;bottom: -8px;width: 20px;height: 20px;}
+.clearing-thumbs li{position: relative;padding: 5px;border: solid 1px #ededed}
+.clearing-thumbs select{position: absolute;right: 10px;bottom: -10px;width: 87px;height: 23px;padding: 3px;}
 .add_pic{font-size: 15px;padding: 0 10px;}
 .clearing-thumbs li:hover{box-shadow: 1px 1px 8px #999}
 .top-bar.expanded .title-area{background: #1450B8}
@@ -28,49 +27,22 @@ ul{margin-bottom: 0;line-height: 3.6}
 .inner-wrap{min-height: 400px;}
 .alert-box{position: fixed;top: 40%;width: 70%;left: 17%;text-align: center;display: none}
 .button{padding: 10px 40px;margin-top: 20px;margin-bottom: 0;background: #1450B8;}
+#modifycontent{width:100%;}
 #save{position: fixed;bottom: 0px;}
-
-/*回到顶部*/
-.fixedtool a {
-    display: block;
-    height: 50px;
-    background: #ededed;
+.tip-fall.s-error{background-image: linear-gradient(to bottom, #f2dede 0px, #e7c3c3 100%);}
+.tip-fall {
+	color: #a94442;
     position: fixed;
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
-    bottom: 70px;
-    right: 20px;
+    width: 800px;
+    left: 50%;
+    top: 0;
+    margin-left: -400px;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 5px 0px rgba(0,0,0,.3);
 }
-.fixedtool a:hover{background: orange}
-.fixedtool a:hover strong{color: #fff;}
-.fixedtool a:hover .tb-icon{color: #fff;}
-.fixedtool a strong {
-    font-weight: 400;
-    display: block;
-    color: #000;
-    height: 44px;
-    margin: -1px 8px 0;
-    padding-top: 6px;
-}
-.fixedtool .tb-icon {
-    color: #999;
-    margin-top: -18px;
-    position: relative;
-    top: 5px;
-    margin-bottom: -3px;
-    transform: rotate(-90deg);
-}
-.fixedtool a i {
-    font-style: normal;
-    font-size: 14px;
-    display: block;
-    line-height: 40px;
-}
-
-
-
 @media only screen and (max-width: 40.063em){
 	.pic_box .th img{height: 120px;}
 }
@@ -79,8 +51,8 @@ ul{margin-bottom: 0;line-height: 3.6}
 }
 @media only screen and (max-width: 40.063em){
 .clearing-assembled .clearing-container .carousel > ul {display: inline-block;}
-.clearing-blackout .clearing-thumbs input{position: fixed;visibility: hidden;}
-.clearing-blackout .clearing-thumbs>.visible input{z-index: 1000;top: 13px;visibility: visible;}
+.clearing-blackout .clearing-thumbs select{position: fixed;top: 23px;right: 10px}
+.clearing-blackout .clearing-thumbs>.visible select{z-index: 1000}
 }
 
 .tiny_button {padding-top: 0.125rem;padding-right: 0.25rem;padding-bottom: 0.1875rem;padding-left: 0.25rem;font-size: 0.1875rem; }
