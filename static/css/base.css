@@ -3,7 +3,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 .inline-list{margin-bottom: 0}
 .title{border-bottom: solid 1px #ededed;overflow: hidden;}
 .pic_box{margin-top: 20px}
-.pic_box p{margin-bottom: 0;line-height: 30px;color: #666;width: 80%;}
+.pic_box p{margin-bottom: 0;line-height: 30px;color: #666;width: 50%;}
 .pic_box p span{font-size: 16px}
 .inline-list > li{float: right;}
 .top-bar{background: #1450B8}
@@ -15,7 +15,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 .inline-list > li > *{font-size: 16px;margin-right: 6px;line-height: 40px;}
 .top-bar-section li:not(.has-form) a:not(.button){background: #1450B8}
 .clearing-thumbs li{position: relative;padding: 5px;border: solid 1px #ededed;margin-bottom: 10px;}
-.clearing-thumbs input{position: absolute;left: 50px;bottom: -8px;width: 20px;height: 20px;}
+.clearing-thumbs input{position: absolute;right: 95px;bottom: -8px;width: 20px;height: 20px;}
 .add_pic{font-size: 15px;padding: 0 10px;}
 .clearing-thumbs li:hover{box-shadow: 1px 1px 8px #999}
 .top-bar.expanded .title-area{background: #1450B8}

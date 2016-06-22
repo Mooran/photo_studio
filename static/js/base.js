@@ -106,7 +106,16 @@ pic = {
                 event.preventDefault();    
             }
         });
-
+        $(".fixedtool-7").on("touchstart",function(){
+            $(this).css("background","orange");
+            $(this).find("strong").css("color","#fff");
+            $(this).find(".tb-icon").css("color","#fff");
+        });
+        $(".fixedtool-7").on("touchend",function(){
+            $(this).css("background","#ededed");
+            $(this).find("strong").css("color","#000");
+            $(this).find(".tb-icon").css("color","#999");
+        });
 
 		$('input[name="pic_id"]').on("click",function(){
 			event.stopPropagation();
