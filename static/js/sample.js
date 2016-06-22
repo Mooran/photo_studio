@@ -105,6 +105,7 @@ pic = {
         });
         $('select[name="pic_id"]').on("click",function(){
         	var that = this;
+        	var old_modify;
         	var imgid = $(that).parent().data("photoid");
         	event.stopPropagation();
         	if(a==1){
@@ -119,6 +120,11 @@ pic = {
         			})
         			console.log(local_arry)
         		}else{
+        			$.each(local_arry,function(key,item){
+        				if(item.imgid == imgid){
+        					old_modify = item.modify;
+        				}
+        			})
 		        	var d = dialog({
 					    title: '请输入需要修改的内容',
 					    content: '<textarea type="text" name="modifycontent" id="modifycontent"></textarea>',
@@ -142,6 +148,7 @@ pic = {
 					    cancel:function(){}
 					});
 					d.showModal();
+					$("#modifycontent").html(old_modify);
         		}
 	            a=0;
 	        }
