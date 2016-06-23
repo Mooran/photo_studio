@@ -64,7 +64,7 @@ pic = {
 			    	if(modify==""||modify==null){
 			    		new tip({
                             type: 'error',
-                            text: '请输入需要修改的内容'
+                            text: '请输入修改要求'
                         }).show();
                         return false;
 			    	}else{
@@ -226,15 +226,18 @@ pic = {
       		});
             if(show_dialog == 1){
                 var last_require = $("#last_require").val();
+                if(last_require == ''||last_require == undefined){
+                    last_require = '请输入本次选样的总体修改要求'
+                }
                 var d = dialog({
-                title: "待修改图片列表",
+                title: "待修改样片列表",
                 content: str,
                 width:'250px',
                 okValue:'确定',
                 ok:function(){
                     dialog({
-                        title: "请输入本次在线选样的总体要求",
-                        content: '<textarea type="text" name="lastrequire" id="lastrequire" placeholder="请输入本次在线选样的总体要求"></textarea>',
+                        title: "请输入本次选样的总体修改要求",
+                        content: '<textarea type="text" name="lastrequire" id="lastrequire" placeholder="'+last_require+'"></textarea>',
                         width:'250px',
                         okValue:'确定',
                         ok:function(){
@@ -271,12 +274,12 @@ pic = {
             d.showModal();
             $("#lastrequire").html(last_require);
             }else{
-                var lastrequire = $("#lastrequire").val();
+                //var lastrequire = $("#lastrequire").val();
                 $.ajax({
                     type:"post",
                     url:"/sample/pick",
                     dataType:"json",
-                    data:{unique_id:unique_id,photo_list:JSON.stringify(local_arry),lastrequire:lastrequire},
+                    data:{unique_id:unique_id,photo_list:JSON.stringify(local_arry),lastrequire:''},
                     success:function(res){
                         if(res.status == 0){
                             $(".alert-box.success").fadeIn();
