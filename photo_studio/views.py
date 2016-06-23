@@ -115,7 +115,7 @@ def pick_sample(request):
         pick_sample.delete()
     create_obj_list = []
     for sample in sample_list:
-        photo_id = sample.get('photo_id')
+        photo_id = sample.get('imgid')
         modify = sample.get('status')
         modify_note = sample.get('modify','')
         create_obj_list.append(SamplePick(unique_id=unique_id,modify=modify,photo_id=photo_id,modify_note=modify_note))
