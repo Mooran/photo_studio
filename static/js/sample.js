@@ -225,7 +225,7 @@ pic = {
       			}
       		});
             if(show_dialog == 1){
-                var lastrequire = $("#last_require").val();
+                var last_require = $("#last_require").val();
                 var d = dialog({
                 title: "待修改图片列表",
                 content: str,
@@ -238,7 +238,7 @@ pic = {
                         width:'250px',
                         okValue:'确定',
                         ok:function(){
-                            //var lastrequire = $("#lastrequire").val();
+                            var lastrequire = $("#lastrequire").val();
                             $.ajax({
                                 type:"post",
                                 url:"/sample/pick",
@@ -269,7 +269,7 @@ pic = {
                 }
             });
             d.showModal();
-            $("#lastrequire").val(lastrequire);
+            $("#lastrequire").html(last_require);
             }else{
                 var lastrequire = $("#lastrequire").val();
                 $.ajax({
