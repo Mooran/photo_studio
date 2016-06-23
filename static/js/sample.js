@@ -57,7 +57,7 @@ pic = {
         	var d = dialog({
 			    title: $(that).parent().data("imgname"),
 			    content: '<textarea type="text" name="modifycontent" id="modifycontent" placeholder="请输入修改要求"></textarea>',
-			    width:'300px',
+			    width:'250px',
 			    okValue:'确定',
 			    ok:function(){
 			    	var modify = $("#modifycontent").val();
