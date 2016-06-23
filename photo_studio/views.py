@@ -74,7 +74,7 @@ def get_sample_data(unique_id):
     photo_list = []
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':int(temp_photo.id),'status':1,'modify':''})
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':int(temp_photo.id),'status':1,'modify':'','option_desc':'已确认'})
 
     for photo in photo_list:
         for pick_sample in pick_sample_list:
