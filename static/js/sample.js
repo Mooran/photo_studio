@@ -165,7 +165,7 @@ pic = {
 					    },
 					    cancelValue:'取消',
 					    cancel:function(){
-					    	dialog.close().remove();
+					    	d.close().remove();
 					    	$(that).val(old_status);
 					    }
 					});
