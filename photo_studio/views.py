@@ -54,7 +54,7 @@ def get_photo_data(unique_id):
     photo_list = []
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id})
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':int(temp_photo.id)})
     data['product_list'] = product_list
     data['unique_id'] = unique_id
     data['photo_list'] = photo_list
@@ -74,7 +74,7 @@ def get_sample_data(unique_id):
     photo_list = []
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id,'status':1,'modify':''})
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':int(temp_photo.id),'status':1,'modify':''})
 
     for photo in photo_list:
         for pick_sample in pick_sample_list:
