@@ -254,7 +254,7 @@ pic = {
 					    	var lastrequire = $("#lastrequire").val();
 					    	$.ajax({
 				      			type:"post",
-				      			url:"/photo/pick",
+				      			url:"/sample/pick",
 				      			dataType:"json",
 				      			data:{unique_id:unique_id,photo_list:JSON.stringify(local_arry),lastrequire:lastrequire},
 				      			success:function(res){
