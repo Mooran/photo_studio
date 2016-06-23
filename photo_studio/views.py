@@ -81,6 +81,7 @@ def get_sample_data(unique_id):
             if pick_sample.photo.id == photo.get('id'):
                 photo['status'] = pick_sample.modify
                 photo['modify'] = pick_sample.modify_note
+                photo['option_desc'] = '已确认' if int(pick_sample.modify) == 1 else '待修改'
     data['photo_list'] = photo_list
     data['unique_id'] = unique_id
     return data
