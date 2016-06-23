@@ -29,7 +29,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 .button{padding: 10px 40px;margin-top: 20px;margin-bottom: 0;background: #1450B8;}
 .ui-dialog-body{padding-bottom: 0px;}
 #modifycontent{width:100%;}
-#lastrequire{width: 300px;height: 200px;}
+#lastrequire{width: 300px;height: 70px;}
 #save{position: fixed;bottom: 0px;}
 .tip-fall.s-error{background-image: linear-gradient(to bottom, #f2dede 0px, #e7c3c3 100%);}
 .tip-fall {
