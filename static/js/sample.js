@@ -29,9 +29,10 @@ pic = {
 					photo_obj = {};
 					photo_obj.name = $(this).data("photoname");
 					photo_obj.imgid = $(this).data("photoid");
-					photo_obj.status = 1;
-					photo_obj.modify = "";
+					photo_obj.status = $(this).data("selectval");
+					photo_obj.modify = $(this).data("modify");
 					local_arry.push(photo_obj);
+					$(this).find("select").val(photo_obj.status);
 				})
 			}
 			console.log(local_arry);
