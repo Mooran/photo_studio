@@ -225,7 +225,7 @@ pic = {
       			}
       		});
             if(show_dialog == 1){
-                var lastrequire = $("#lastrequire").val();
+                var lastrequire = $("#last_require").val();
                 var d = dialog({
                 title: "待修改图片列表",
                 content: str,
