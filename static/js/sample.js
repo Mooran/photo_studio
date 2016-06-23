@@ -245,6 +245,7 @@ pic = {
                                 dataType:"json",
                                 data:{unique_id:unique_id,photo_list:JSON.stringify(local_arry),lastrequire:lastrequire},
                                 success:function(res){
+                                    $("#last_require").val(lastrequire);
                                     if(res.status == 0){
                                         $(".alert-box.success").fadeIn();
                                     }else if(res.status == 1){
