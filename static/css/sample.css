@@ -104,3 +104,45 @@ input{font-size: 14px;font-family:"微软雅黑","Microsoft Yahei";}
 .nice-select .ul .li{height: 30px;line-height: 30px;overflow: hidden;padding: 0 10px;cursor: pointer;}
 .nice-select .ul .li.on{background-color: #e0e0e0;}
 input[type="text"][readonly]{background: none}
+
+
+
+
+/*回到顶部*/
+.fixedtool a {
+    display: block;
+    height: 50px;
+    background: #ededed;
+    position: fixed;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    bottom: 70px;
+    right: 20px;
+}
+.fixedtool a:hover{background: orange}
+.fixedtool a:hover strong{color: #fff;}
+.fixedtool a:hover .tb-icon{color: #fff;}
+.fixedtool a strong {
+    font-weight: 400;
+    display: block;
+    color: #000;
+    height: 44px;
+    margin: -1px 8px 0;
+    padding-top: 6px;
+}
+.fixedtool .tb-icon {
+    color: #999;
+    margin-top: -18px;
+    position: relative;
+    top: 5px;
+    margin-bottom: -3px;
+    transform: rotate(-90deg);
+}
+.fixedtool a i {
+    font-style: normal;
+    font-size: 14px;
+    display: block;
+    line-height: 40px;
+}
