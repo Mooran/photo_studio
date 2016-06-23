@@ -39,6 +39,8 @@ def sample_index(request,access_key):
         return HttpResponse('订单不存在',content_type='text/html; charset=UTF-8')
     unique_id = order_object[0].unique_id
     data = get_sample_data(unique_id)
+    data['lastrequire'] = order_object[0].modify_note
+    print data
     template = get_template('sample.html')
     variables = RequestContext(request,data)
     output = template.render(variables)
@@ -72,13 +74,13 @@ def get_sample_data(unique_id):
     photo_list = []
     for temp_photo in temp_photo_list:
         photo_name = '%s-%s' % (temp_photo.scene_name,temp_photo.name) if temp_photo.scene_name else temp_photo.name
-        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id,'modify':1,'modify_note':''})
+        photo_list.append({'name':photo_name,'url':'/%s' % temp_photo.image.name,'id':temp_photo.id,'status':1,'modify':''})
 
     for photo in photo_list:
         for pick_sample in pick_sample_list:
             if pick_sample.photo.id == photo.get('id'):
-                photo['modify'] = pick_sample.modify
-                photo['modify_note'] = pick_sample.modify_note
+                photo['status'] = pick_sample.modify
+                photo['modify'] = pick_sample.modify_note
     data['photo_list'] = photo_list
     data['unique_id'] = unique_id
     return data
