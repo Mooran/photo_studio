@@ -177,6 +177,7 @@ pic = {
 	        }
 	        else {
 	            a=1;
+	            console.log("aaa")
 	            old_status = $(that).val();
 	        }
         });
