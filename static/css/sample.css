@@ -14,7 +14,7 @@ ul{margin-bottom: 0;line-height: 3.6}
 .inline-list > li > *{font-size: 16px;margin-right: 6px;line-height: 40px;}
 .top-bar-section li:not(.has-form) a:not(.button){background: #1450B8}
 .clearing-thumbs li{position: relative;padding: 5px;border: solid 1px #ededed}
-.clearing-thumbs select{position: absolute;right: 10px;bottom: -10px;width: 87px;height: 23px;padding: 3px;}
+.clearing-thumbs .select{position: absolute;right: 10px;bottom: 5px;width: 92px;height: 23px;padding: 3px;}
 .add_pic{font-size: 15px;padding: 0 10px;}
 .clearing-thumbs li:hover{box-shadow: 1px 1px 8px #999}
 .top-bar.expanded .title-area{background: #1450B8}
@@ -55,6 +55,48 @@ ul{margin-bottom: 0;line-height: 3.6}
 .clearing-blackout .clearing-thumbs>.visible select{z-index: 1000}
 }
 
+
 .tiny_button {padding-top: 0.125rem;padding-right: 0.25rem;padding-bottom: 0.1875rem;padding-left: 0.25rem;font-size: 0.1875rem; }
 .product_select{width:15%;}
 .clearing-close {font-size:40px;padding-top:15px;width:60px;}
+
+
+
+
+body{
+    color: #555;
+    font-size: 14px;
+    font-family: "微软雅黑","Microsoft Yahei";
+}
+a{color: #555;}
+a:hover{color: #f00;}
+input{font-size: 14px;font-family:"微软雅黑","Microsoft Yahei";}
+.wrap{width: 500px;margin: 100px auto;}
+.nice-select{
+    width: 245px;
+    padding: 0 10px;
+    height: 16px;
+    border: 1px solid #999;
+    position: relative;
+    box-shadow: 0 0 5px #999;
+    background: #fff url(/static/img/a2.jpg) no-repeat right center;
+}
+.nice-select input{display: block;width: 100%;height: 16px;line-height: 16px \9;border: 0;outline: 0;background: none;}
+.nice-select .ul{
+    width: 92px;
+    display: none;
+    position: absolute;
+    left: -1px;
+    top: 21px;
+    overflow: hidden;
+    background-color: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #999;
+    border-top: 0;
+    box-shadow: 0 3px 5px #999;
+    z-index: 9999;
+}
+.nice-select .ul .li{height: 30px;line-height: 30px;overflow: hidden;padding: 0 10px;cursor: pointer;}
+.nice-select .ul .li.on{background-color: #e0e0e0;}
+input[type="text"][readonly]{background: none}

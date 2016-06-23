@@ -70,10 +70,17 @@
             <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}" data-selectval="{{photo.status}}" data-modify="{{photo.modify}}" data-photoname="{{photo.name}}">
               <a href="{{photo.url}}"><img src="{{photo.url}}"  /></a>
               <p class="text-left"><span data-name="{{photo.name}}">{{photo.name}}</span></p>
-              <select value="" name="pic_id" data-name="{{photo.name}}">
-                <option value="1">确认选择</option>
-                <option value="2">有待修改</option>
-              </select>
+              <div class="nice-select select" name="nice-select">
+                <input type="text" value="确认选择" readonly>
+                <div class="ul">
+                  <div class="li" data-value="1">确认选择</div>
+                  <div class="li" data-value="2">有待修改</div>
+                </div>
+              </div>
+              <!-- <select value="" name="pic_id" data-name="{{photo.name}}">
+                <option value="1"><a href="#">确认选择</a></option>
+                <option value="2"><a href="#">有待修改</a></option>
+              </select> -->
             </li>
             {% endfor %}
             </ul>
@@ -110,5 +117,25 @@
       $(document).foundation();
     </script>
     <script src="/static/js/sample.js?v=1.0.2"></script>
+    <script>
+    $('[name="nice-select"]').click(function(e){
+        $('[name="nice-select"]').find('.ul').hide();
+        $(this).find('.ul').show();
+      e.stopPropagation();
+    });
+    $('[name="nice-select"] .li').hover(function(e){
+      $(this).toggleClass('on');
+      e.stopPropagation();
+    });
+    $('[name="nice-select"] .li').click(function(e){
+      var val = $(this).text();
+      $(this).parents('[name="nice-select"]').find('input').val(val);
+      $('[name="nice-select"] .ul').hide();
+      e.stopPropagation();
+    });
+    $(document).click(function(){
+      $('[name="nice-select"] .ul').hide();
+    });
+  </script>
   </body>
 </html>
