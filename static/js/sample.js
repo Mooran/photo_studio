@@ -269,7 +269,7 @@ pic = {
                 }
             });
             d.showModal();
-            $("#lastrequire").val();
+            $("#lastrequire").val(lastrequire);
             }else{
                 var lastrequire = $("#lastrequire").val();
                 $.ajax({
