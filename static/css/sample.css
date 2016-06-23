@@ -55,8 +55,8 @@ ul{margin-bottom: 0;line-height: 3.6}
 }
 @media only screen and (max-width: 40.063em){
 .clearing-assembled .clearing-container .carousel > ul {display: inline-block;}
-.clearing-blackout .clearing-thumbs select{position: fixed;top: 23px;right: 10px}
-.clearing-blackout .clearing-thumbs>.visible select{z-index: 1000}
+.clearing-blackout .clearing-thumbs .select{position: fixed;top: 23px;right: 10px}
+.clearing-blackout .clearing-thumbs>.visible .select{z-index: 1000}
 }
 
 
@@ -85,7 +85,7 @@ input{font-size: 14px;font-family:"微软雅黑","Microsoft Yahei";}
     box-shadow: 0 0 5px #999;
     background: #fff url(/static/img/a2.jpg) no-repeat right center;
 }
-.nice-select input{display: block;width: 100%;height: 16px;line-height: 16px \9;border: 0;outline: 0;background: none;}
+.nice-select input{display: block;width: 100%;height: 16px;line-height: 16px;border: 0;outline: 0;background: none;}
 .nice-select .ul{
     width: 92px;
     display: none;
