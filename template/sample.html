@@ -15,7 +15,7 @@
   </head>
   <body>
   <input type="hidden" id="unique_id" value="{{unique_id}}" />
-  <input type="hidden" id="history_data" value="{{pick_photo_list}}" />
+  <input type="hidden" id="last_require" value="{{lastrequire}}" />
   <div class="off-canvas-wrap docs-wrap" data-offcanvas="">
     <div class="inner-wrap">
 
@@ -67,10 +67,10 @@
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
             {% for photo in photo_list %}
-            <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}" data-photoname="{{photo.name}}">
+            <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}" data-selectval="{{photo.status}}" data-modify="{{photo.modify}}" data-photoname="{{photo.name}}">
               <a href="{{photo.url}}"><img src="{{photo.url}}"  /></a>
               <p class="text-left"><span data-name="{{photo.name}}">{{photo.name}}</span></p>
-              <select value="1" name="pic_id" data-name="{{photo.name}}">
+              <select value="" name="pic_id" data-name="{{photo.name}}">
                 <option value="1">确认选择</option>
                 <option value="2">有待修改</option>
               </select>
