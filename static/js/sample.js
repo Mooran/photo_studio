@@ -262,6 +262,7 @@ pic = {
                             d.close().remove();
                         }
                     }).show();
+                    $("#lastrequire").html($("#last_require").val());
                 },
                 cancelValue:'取消',
                 cancel:function(){
@@ -269,7 +270,6 @@ pic = {
                 }
             });
             d.showModal();
-            $("#lastrequire").html($("#last_require").val());
             }else{
                 //var lastrequire = $("#lastrequire").val();
                 $.ajax({
