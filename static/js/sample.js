@@ -21,6 +21,80 @@ pic = {
 			this.splice(index, 1);
 			}
 		};
+
+
+		$('[name="nice-select"]').click(function(e){
+	        $('[name="nice-select"]').find('.ul').hide();
+	        $(this).find('.ul').show();
+	      e.stopPropagation();
+	    });
+	    $('[name="nice-select"] .li').hover(function(e){
+	      $(this).toggleClass('on');
+	      e.stopPropagation();
+	    });
+	    $('[name="nice-select"] .li').click(function(e){
+	      var that = this;
+	      var val = $(this).text();
+	      var status = $(this).data("value");
+	      var imgid = $(that).parent().data("photoid");
+	      $('[name="nice-select"] .ul').hide();
+	      if(status == "1"){
+	      	$.each(local_arry,function(key,item){
+				if(item.imgid == imgid){
+					item.status = 1;
+					item.modify = '';
+				}
+			});
+			$(that).parents('[name="nice-select"]').find('input').val(val);
+			$(that).parents('[name="nice-select"]').find('input').data("value","1");
+			console.log(local_arry)
+	      }else{
+	      	$.each(local_arry,function(key,item){
+				if(item.imgid == imgid){
+					old_modify = item.modify;
+				}
+			})
+        	var d = dialog({
+			    title: $(that).parent().data("imgname"),
+			    content: '<textarea type="text" name="modifycontent" id="modifycontent" placeholder="请输入修改要求"></textarea>',
+			    width:'300px',
+			    okValue:'确定',
+			    ok:function(){
+			    	var modify = $("#modifycontent").val();
+			    	if(modify==""||modify==null){
+			    		new tip({
+                            type: 'error',
+                            text: '请输入需要修改的内容'
+                        }).show();
+                        return false;
+			    	}else{
+			    		$.each(local_arry,function(key,item){
+	        				if(item.imgid == imgid){
+	        					item.status = 2;
+	        					item.modify = modify;
+	        				}
+	        			})
+			    	}
+			    	$(that).parents('[name="nice-select"]').find('input').val(val);
+			    	$(that).parents('[name="nice-select"]').find('input').data("value","2");
+			    	console.log(local_arry)
+			    },
+			    cancelValue:'取消',
+			    cancel:function(){
+			    	d.close().remove();
+			    	$(that).val(old_status);
+			    }
+			});
+			d.showModal();
+			$("#modifycontent").html(old_modify);
+	      }
+	      e.stopPropagation();
+	    });
+	    $(document).click(function(){
+	      $('[name="nice-select"] .ul').hide();
+	    });
+
+
 		$(document).ready(function(){
 			var photo_obj;
 			var photo_num = $(".clearing-thumbs").find("li");
@@ -41,9 +115,9 @@ pic = {
 		//查看已确认
 		$(".choosed").on("click",function(){
 			$(".clearing-thumbs").find("li").hide();
-			$(".clearing-thumbs").find("select").each(function(){
-				if($(this).val()=="1"){
-					$(this).parent().show();
+			$(".clearing-thumbs").find("input").each(function(){
+				if($(this).data("value")=="1"){
+					$(this).parent().parent().show();
 				}
 			});
 			$(".off-canvas-wrap").removeClass("move-right");
@@ -52,9 +126,9 @@ pic = {
 	    //查看待修改
 		$(".unchoose").on("click",function(){
 			$(".clearing-thumbs").find("li").show();
-			$(".clearing-thumbs").find("select").each(function(){
-				if($(this).val()=="1"){
-					$(this).parent().hide();
+			$(".clearing-thumbs").find("input").each(function(){
+				if($(this).data("value")=="1"){
+					$(this).parent().parent().hide();
 				}
 			});
 			$(".off-canvas-wrap").removeClass("move-right");
@@ -72,68 +146,68 @@ pic = {
                 event.preventDefault();
             }
         });
-        $('select[name="pic_id"]').on("click",function(){
-        	var that = this;
-        	var old_modify;
-        	var imgid = $(that).parent().data("photoid");
-        	event.stopPropagation();
-        	if(a==1){
-        		var status = $(this).val();
-        		if(status == 1){
+     //    $('select[name="pic_id"]').on("click",function(){
+     //    	var that = this;
+     //    	var old_modify;
+     //    	var imgid = $(that).parent().data("photoid");
+     //    	event.stopPropagation();
+     //    	if(a==1){
+     //    		var status = $(this).val();
+     //    		if(status == 1){
 
-        			$.each(local_arry,function(key,item){
-        				if(item.imgid == imgid){
-        					item.status = 1;
-        					item.modify = '';
-        				}
-        			})
-        			console.log(local_arry)
-        		}else{
-        			$.each(local_arry,function(key,item){
-        				if(item.imgid == imgid){
-        					old_modify = item.modify;
-        				}
-        			})
-		        	var d = dialog({
-					    title: $(that).data("name"),
-					    content: '<textarea type="text" name="modifycontent" id="modifycontent" placeholder="请输入修改要求"></textarea>',
-					    width:'300px',
-					    okValue:'确定',
-					    ok:function(){
-					    	var modify = $("#modifycontent").val();
-					    	if(modify==""||modify==null){
-					    		new tip({
-		                            type: 'error',
-		                            text: '请输入需要修改的内容'
-		                        }).show();
-		                        return false;
-					    	}else{
-					    		$.each(local_arry,function(key,item){
-			        				if(item.imgid == imgid){
-			        					item.status = 2;
-			        					item.modify = modify;
-			        				}
-			        			})
-					    	}
-					    	console.log(local_arry)
-					    },
-					    cancelValue:'取消',
-					    cancel:function(){
-					    	d.close().remove();
-					    	$(that).val(old_status);
-					    }
-					});
-					d.showModal();
-					$("#modifycontent").html(old_modify);
-        		}
-	            a=0;
-	        }
-	        else {
-	            a=1;
-	            console.log("aaa")
-	            old_status = $(that).val();
-	        }
-        });
+     //    			$.each(local_arry,function(key,item){
+     //    				if(item.imgid == imgid){
+     //    					item.status = 1;
+     //    					item.modify = '';
+     //    				}
+     //    			})
+     //    			console.log(local_arry)
+     //    		}else{
+     //    			$.each(local_arry,function(key,item){
+     //    				if(item.imgid == imgid){
+     //    					old_modify = item.modify;
+     //    				}
+     //    			})
+		   //      	var d = dialog({
+					//     title: $(that).data("name"),
+					//     content: '<textarea type="text" name="modifycontent" id="modifycontent" placeholder="请输入修改要求"></textarea>',
+					//     width:'300px',
+					//     okValue:'确定',
+					//     ok:function(){
+					//     	var modify = $("#modifycontent").val();
+					//     	if(modify==""||modify==null){
+					//     		new tip({
+		   //                          type: 'error',
+		   //                          text: '请输入需要修改的内容'
+		   //                      }).show();
+		   //                      return false;
+					//     	}else{
+					//     		$.each(local_arry,function(key,item){
+			  //       				if(item.imgid == imgid){
+			  //       					item.status = 2;
+			  //       					item.modify = modify;
+			  //       				}
+			  //       			})
+					//     	}
+					//     	console.log(local_arry)
+					//     },
+					//     cancelValue:'取消',
+					//     cancel:function(){
+					//     	d.close().remove();
+					//     	$(that).val(old_status);
+					//     }
+					// });
+					// d.showModal();
+					// $("#modifycontent").html(old_modify);
+     //    		}
+	    //         a=0;
+	    //     }
+	    //     else {
+	    //         a=1;
+	    //         console.log("aaa")
+	    //         old_status = $(that).val();
+	    //     }
+     //    });
 
 	    $(".alert-box").find(".close").on("click",function(){
 	    	event.stopPropagation();

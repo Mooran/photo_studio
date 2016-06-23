@@ -71,8 +71,8 @@
               <a href="{{photo.url}}"><img src="{{photo.url}}"  /></a>
               <p class="text-left"><span data-name="{{photo.name}}">{{photo.name}}</span></p>
               <div class="nice-select select" name="nice-select">
-                <input type="text" value="确认选择" readonly>
-                <div class="ul">
+                <input type="text" value="{{photo.option_desc}}" data-value="{{photo.status}}" readonly>
+                <div class="ul" data-photoid="{{photo.id}}" data-imgname="{{photo.name}}">
                   <div class="li" data-value="1">确认选择</div>
                   <div class="li" data-value="2">有待修改</div>
                 </div>
@@ -117,25 +117,5 @@
       $(document).foundation();
     </script>
     <script src="/static/js/sample.js?v=1.0.2"></script>
-    <script>
-    $('[name="nice-select"]').click(function(e){
-        $('[name="nice-select"]').find('.ul').hide();
-        $(this).find('.ul').show();
-      e.stopPropagation();
-    });
-    $('[name="nice-select"] .li').hover(function(e){
-      $(this).toggleClass('on');
-      e.stopPropagation();
-    });
-    $('[name="nice-select"] .li').click(function(e){
-      var val = $(this).text();
-      $(this).parents('[name="nice-select"]').find('input').val(val);
-      $('[name="nice-select"] .ul').hide();
-      e.stopPropagation();
-    });
-    $(document).click(function(){
-      $('[name="nice-select"] .ul').hide();
-    });
-  </script>
   </body>
 </html>
