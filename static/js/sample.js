@@ -228,13 +228,13 @@ pic = {
                 var d = dialog({
                 title: "待修改图片列表",
                 content: str,
-                width:'300px',
+                width:'250px',
                 okValue:'确定',
                 ok:function(){
                     dialog({
                         title: "请输入本次在线选样的总体要求",
                         content: '<textarea type="text" name="lastrequire" id="lastrequire" placeholder="请输入本次在线选样的总体要求"></textarea>',
-                        width:'300px',
+                        width:'250px',
                         okValue:'确定',
                         ok:function(){
                             var lastrequire = $("#lastrequire").val();
