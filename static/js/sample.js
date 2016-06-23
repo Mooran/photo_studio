@@ -226,9 +226,6 @@ pic = {
       		});
             if(show_dialog == 1){
                 var last_require = $("#last_require").val();
-                if(last_require == ''||last_require == undefined){
-                    last_require = '请输入本次选样的总体修改要求'
-                }
                 var d = dialog({
                 title: "待修改样片列表",
                 content: str,
@@ -237,7 +234,7 @@ pic = {
                 ok:function(){
                     dialog({
                         title: "请输入本次选样的总体修改要求",
-                        content: '<textarea type="text" name="lastrequire" id="lastrequire" placeholder="'+last_require+'"></textarea>',
+                        content: '<textarea type="text" name="lastrequire" id="lastrequire" placeholder="请输入本次选样的总体修改要求"></textarea>',
                         width:'250px',
                         okValue:'确定',
                         ok:function(){
@@ -272,7 +269,7 @@ pic = {
                 }
             });
             d.showModal();
-            $("#lastrequire").html(last_require);
+            $("#lastrequire").html($("#last_require").val());
             }else{
                 //var lastrequire = $("#lastrequire").val();
                 $.ajax({
