@@ -269,6 +269,7 @@ pic = {
             });
             d.showModal();
             }else{
+                var lastrequire = $("#lastrequire").val();
                 $.ajax({
                     type:"post",
                     url:"/sample/pick",
