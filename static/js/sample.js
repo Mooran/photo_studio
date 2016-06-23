@@ -46,20 +46,7 @@ pic = {
 					$(this).parent().show();
 				}
 			});
-			// $('nav[data-id="choosed"]').show();
-			// $('nav[data-id="prodect_list"]').hide();
 			$(".off-canvas-wrap").removeClass("move-right");
-			// $(".rechoose").html("已选照片");
-	  //       $(".clearing-thumbs").find("li").hide();
-	        // $("#second_protype_choose").find("*[data-productid]").removeClass("active");
-	  //       $("#second_protype_choose").find(".dropdown").find("span").html("全部已选")
-	  //       $.each(local_arry,function(i,val){
-			// 	$.each(val.photo_list,function(key,item){
-			// 		$(".clearing-thumbs").find('input[value="'+item+'"]').parent().show();
-			// 		$(".clearing-thumbs").find('input[value="'+item+'"]').prop("checked",true);
-			// 	})
-			// });
-			// check_status = "choosed";
 	    });
 
 	    //查看待修改
@@ -70,46 +57,12 @@ pic = {
 					$(this).parent().hide();
 				}
 			});
-	  //     	$('nav[data-id="choosed"]').show();
-			// $('nav[data-id="prodect_list"]').hide();
 			$(".off-canvas-wrap").removeClass("move-right");
-			// $(".rechoose").html("未选照片");
-	  //       $(".clearing-thumbs").find("li").show();
-	  //       $("#second_protype_choose").find("*[data-productid]").removeClass("active");
-	  //       $("#second_protype_choose").find(".dropdown").find("span").html("全部未选")
-	  //       $.each(local_arry,function(i,val){
-			// 	$.each(val.photo_list,function(key,item){
-			// 		$(".clearing-thumbs").find('input[value="'+item+'"]').parent().hide();
-			// 		$(".clearing-thumbs").find('input[value="'+item+'"]').prop("checked",false);
-			// 	})
-			// });
-			// check_status = "unchoose";
         });
-
-        // $('a[data-productid="all"]').on("click",function(){
-        // 	event.stopPropagation();
-        // 	if(check_status == "choosed"){
-        // 		$(".choosed").trigger("click");
-        // 	}else if(check_status == "unchoose"){
-        // 		$(".unchoose").trigger("click");
-        // 	}
-        // });
 		//查看全部
         $(".choose_pic").on("click",function(){
         	$(".clearing-thumbs").find("li").show();
-   //      	var local_product_id = $(".active").data("productid");
-   //      	$('nav[data-id="choosed"]').hide();
-			// $('nav[data-id="prodect_list"]').show();
-			// $(".clearing-thumbs").find("li").show();
-			// $(".clearing-thumbs").find("input").prop("checked",false);
 			$(".off-canvas-wrap").removeClass("move-right");
-			// $.each(local_arry,function(i,val){
-			// 	if(local_product_id == val.product_id){
-			// 		$.each(val.photo_list,function(key,item){
-			// 			$('input[value="'+item+'"]').prop("checked",true);
-			// 		})
-			// 	}
-			// })
         });
 
         $(".pic_box").on("click",function(){
@@ -181,52 +134,6 @@ pic = {
 	            old_status = $(that).val();
 	        }
         });
-
-		// $("#drop1>li").on("click",function(){
-  //       	var str = $(this).text();
-  //       	$("#product_type_choose").find("*[data-productid]").removeClass("active");
-  //       	$(this).find("*[data-productid]").addClass("active");
-  //       	$(this).parent().parent().find(".dropdown").find("span").html(str);
-  //       	$("input").prop("checked",false);
-  //       	var local_product_id = $("#product_type_choose").find(".active").data("productid");
-  //       	$.each(local_arry,function(i,val){
-		// 		if(val.product_id == local_product_id){
-		// 			$.each(val.photo_list,function(key,item){
-		// 				$('input[value="'+item+'"]').prop("checked",true);
-		// 			})
-		// 		}
-		// 	})
-  //       });
-
-    //     $("#drop2>li").on("click",function(){
-    //     	var str = $(this).text();
-    //     	$("#second_protype_choose").find("*[data-productid]").removeClass("active");
-    //     	$(this).find("*[data-productid]").addClass("active");
-    //     	$(this).parent().parent().find(".dropdown").find("span").html(str);
-    //     	$("input").prop("checked",false);
-    //     	var local_product_id = $("#second_protype_choose").find(".active").data("productid");
-    //     	if(check_status == "choosed"){
-    //     		$('input[type="checkbox"]').parent().hide();
-	   //      	$.each(local_arry,function(i,val){
-				// 	if(val.product_id == local_product_id){
-				// 		$.each(val.photo_list,function(key,item){
-				// 			$('input[value="'+item+'"]').prop("checked",true);
-				// 			$(".pic_box").find('input[value="'+item+'"]').parent().show();
-				// 		})
-				// 	}
-				// })
-    //     	}else if(check_status == "unchoose"){
-    //     		$('input[type="checkbox"]').parent().show();
-	   //      	$.each(local_arry,function(i,val){
-				// 	if(val.product_id == local_product_id){
-				// 		$.each(val.photo_list,function(key,item){
-				// 			$('input[value="'+item+'"]').prop("checked",true);
-				// 			$(".pic_box").find('input[value="'+item+'"]').parent().hide();
-				// 		})
-				// 	}
-				// })
-    //     	}
-    //     });
 
 	    $(".alert-box").find(".close").on("click",function(){
 	    	event.stopPropagation();
