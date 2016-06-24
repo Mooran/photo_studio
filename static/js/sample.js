@@ -64,14 +64,14 @@ pic = {
         	var d = dialog({
 			    title: $(that).parent().data("imgname"),
 			    content: '<textarea type="text" name="modifycontent" id="modifycontent" placeholder="请输入修改要求"></textarea>',
-			    width:'300px',
+			    width:'250px',
 			    okValue:'确定',
 			    ok:function(){
 			    	var modify = $("#modifycontent").val();
 			    	if(modify==""||modify==null){
 			    		new tip({
                             type: 'error',
-                            text: '请输入需要修改的内容'
+                            text: '请输入修改要求'
                         }).show();
                         return false;
 			    	}else{
@@ -224,54 +224,80 @@ pic = {
       	$("#save").on("click",function(){
       		var str = '';
       		var unique_id = $("#unique_id").val();
+            var show_dialog = 0;
       		$.each(local_arry,function(key,item){
       			if(item.status == 2&&item.modify!=''){
       				str = str + '<div class="row"><div class="columns small-4">'+item.name+'</div><div class="columns small-8" style="word-wrap: break-word;">'+item.modify+'</div></div>';
+                    show_dialog = 1;
       			}
       		});
-      		var d = dialog({
-			    title: "待修改图片列表",
-			    content: str,
-			    width:'300px',
-			    okValue:'确定',
-			    ok:function(){
-			    	dialog({
-					    title: "请输入本次在线选样的总体要求",
-					    content: '<textarea type="text" name="lastrequire" id="lastrequire" placeholder="请输入本次在线选样的总体要求"></textarea>',
-					    width:'300px',
-					    okValue:'确定',
-					    ok:function(){
-					    	var lastrequire = $("#lastrequire").val();
-					    	$.ajax({
-				      			type:"post",
-				      			url:"/sample/pick",
-				      			dataType:"json",
-				      			data:{unique_id:unique_id,photo_list:JSON.stringify(local_arry),lastrequire:lastrequire},
-				      			success:function(res){
-				      				if(res.status == 0){
-				      					$(".alert-box.success").fadeIn();
-				      				}else if(res.status == 1){
-				      					$(".alert-box.alert").fadeIn();
-				      				}
-				      			},
-				      			error:function(res){
-				      				$(".alert-box.alert").fadeIn();
-				      			}
-				      		});
-				      		d.close().remove();
-					    },
-					    cancelValue:'取消',
-					    cancel:function(){
-					    	d.close().remove();
-					    }
-					}).show();
-			    },
-			    cancelValue:'取消',
-			    cancel:function(){
-			    	d.close().remove();
-			    }
-			});
-			d.showModal();
+            if(show_dialog == 1){
+                var last_require = $("#last_require").val();
+                var d = dialog({
+                title: "待修改样片列表",
+                content: str,
+                width:'250px',
+                okValue:'确定',
+                ok:function(){
+                    dialog({
+                        title: "请输入本次选样的总体修改要求",
+                        content: '<textarea type="text" name="lastrequire" id="lastrequire" placeholder="请输入本次选样的总体修改要求"></textarea>',
+                        width:'250px',
+                        okValue:'确定',
+                        ok:function(){
+                            var lastrequire = $("#lastrequire").val();
+                            $.ajax({
+                                type:"post",
+                                url:"/sample/pick",
+                                dataType:"json",
+                                data:{unique_id:unique_id,photo_list:JSON.stringify(local_arry),lastrequire:lastrequire},
+                                success:function(res){
+                                    $("#last_require").val(lastrequire);
+                                    if(res.status == 0){
+                                        $(".alert-box.success").fadeIn();
+                                    }else if(res.status == 1){
+                                        $(".alert-box.alert").fadeIn();
+                                    }
+                                },
+                                error:function(res){
+                                    $(".alert-box.alert").fadeIn();
+                                }
+                            });
+                            d.close().remove();
+                        },
+                        cancelValue:'取消',
+                        cancel:function(){
+                            d.close().remove();
+                        }
+                    }).show();
+                    $("#lastrequire").html($("#last_require").val());
+                },
+                cancelValue:'取消',
+                cancel:function(){
+                    d.close().remove();
+                }
+            });
+            d.showModal();
+            }else{
+                //var lastrequire = $("#lastrequire").val();
+                $.ajax({
+                    type:"post",
+                    url:"/sample/pick",
+                    dataType:"json",
+                    data:{unique_id:unique_id,photo_list:JSON.stringify(local_arry),lastrequire:''},
+                    success:function(res){
+                        if(res.status == 0){
+                            $(".alert-box.success").fadeIn();
+                        }else if(res.status == 1){
+                            $(".alert-box.alert").fadeIn();
+                        }
+                    },
+                    error:function(res){
+                        $(".alert-box.alert").fadeIn();
+                    }
+                });
+            }
+      		
       	});
 	}
 };
