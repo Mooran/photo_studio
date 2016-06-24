@@ -22,6 +22,13 @@ pic = {
 			}
 		};
 
+		$("#drop1>li").on("click",function(){
+        	var str = $(this).text();
+        	$("#product_type_choose").find("*[data-productid]").removeClass("active");
+        	$(this).find("*[data-productid]").addClass("active");
+        	$(this).parent().parent().find(".dropdown").find("span").html(str);
+        });
+
 
 		$('[name="nice-select"]').click(function(e){
 	        $('[name="nice-select"]').find('.ul').hide();
