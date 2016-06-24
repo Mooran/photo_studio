@@ -243,7 +243,7 @@ def get_sample_pick(request):
     order_object = order_object[0]
     unique_id = order_object.unique_id
     pick_sample_list = SamplePick.objects.select_related().filter(unique_id=unique_id)
-    result = {'genral_require':order_object.modify_note,'sample_list':[]}
+    result = {'general_require':order_object.modify_note,'sample_list':[]}
     for pick_sample in pick_sample_list:
         temp_dict = dict()
         photo_name = '%s-%s' % (pick_sample.photo.scene_name,pick_sample.photo.name) if pick_sample.photo.scene_name else pick_sample.photo.name
