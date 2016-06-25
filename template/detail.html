@@ -32,7 +32,7 @@
         <a href="#" name="topnav"></a>
         <section class="columns small-9 middle tab-bar-section" id="product_type_choose">
           <a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="dropdown" style="color:#FFFFFF;font-size:16px;"><span class="active" data-productid="{{product_list.0.id}}">{{product_list.0.name}}</span><img src="/static/img/drop.png" style="max-width: 16px;margin-left: 3px;" /></a>
-          <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+          <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true" style="overflown-y:scroll;height:350px;">
             {% for product in product_list %}
               <li><a href="#" data-productid="{{product.id}}">{{product.name}}</a></li>
             {% endfor %}
