@@ -138,6 +138,9 @@ input[type="text"][readonly]{background: none}
     position: relative;
     top: 5px;
     margin-bottom: -3px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
 .fixedtool a i {
