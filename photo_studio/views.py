@@ -162,6 +162,10 @@ def push_order(request):
     scene_name = request.POST.get('scene_name','')
     pre_path_str = '%s%s' % (unique_id,int(time.time()))
     access_path = hashlib.md5(pre_path_str).hexdigest()
+    existed_order = Order.objects.filter(unique_id=unique_id)
+    if existed_order:
+        existed_order = existed_order[0]
+        return '/index/photo/%s' % existed_order.access_path if not source else 'index/sample/%s' % existed_order.access_path
     Order(unique_id=unique_id,order_num=order_num,customer_name=customer_name,customer_phone=customer_phone,studio_name=studio_name,studio_phone=studio_phone,scene_name=scene_name,access_path=access_path).save()
     return '/index/photo/%s' % access_path if not source else 'index/sample/%s' % access_path
 
