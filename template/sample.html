@@ -78,9 +78,9 @@
           <section class="pic_box">
             <ul class="clearing-thumbs" data-clearing>
             {% for photo in photo_list %}
-            <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}" data-selectval="{{photo.status}}" data-modify="{{photo.modify}}" data-photoname="{{photo.name}}">
+            <li class="small-12 medium-3 large-2" data-photoid="{{photo.id}}" data-selectval="{{photo.status}}" data-modify="{{photo.modify}}" data-photoname="{{photo.name}}" style="text-align:center;">
               <a href="{{photo.url}}"><img src="{{photo.url}}"  /></a>
-              <p class="text-left"><span data-name="{{photo.name}}">{{photo.name}}</span></p>
+              <p class=""><span data-name="{{photo.name}}">{{photo.name}}</span></p>
               <div class="nice-select select" name="nice-select">
                 <input type="text" value="{{photo.option_desc}}" data-value="{{photo.status}}" style="height:19px;" readonly>
                 <div class="ul" data-photoid="{{photo.id}}" data-imgname="{{photo.name}}">
