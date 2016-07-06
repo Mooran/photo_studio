@@ -64,6 +64,7 @@ class PhotoPick(models.Model):
     product = models.ForeignKey(Product)
     photo = models.ForeignKey(Photo)
     pick_num = models.IntegerField(default=1)
+    last_modify_time = models.DateTimeField()
 
 
 class SamplePick(models.Model):
@@ -76,6 +77,7 @@ class SamplePick(models.Model):
     photo = models.ForeignKey(Photo)
     modify = models.IntegerField(default=1)
     modify_note = models.CharField(max_length=1024,blank=True,null=True,default='')
+    last_modify_time = models.DateTimeField(auto_now_add=True)
 
 
 

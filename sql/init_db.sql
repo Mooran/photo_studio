@@ -41,6 +41,7 @@ CREATE TABLE `photo_pick` (
   `product_id` int(11) NOT NULL,
   `photo_id` int(11) NOT NULL,
   `pick_num` int(11) NOT NULL,
+  `last_modify_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `photo_pick_product_id` (`product_id`),
   KEY `photo_pick_photo_id` (`photo_id`)
@@ -52,6 +53,7 @@ CREATE TABLE `sample_pick` (
   `photo_id` int(11) NOT NULL,
   `modify` tinyint(2) NOT NULL DEFAULT 1 COMMENT '1已确认，2待修改',
   `modify_note` varchar(1024) NULL DEFAULT NULL COMMENT '修改意见',
+  `last_modify_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sample_pick_unique_id` (`unique_id`),
   KEY `sample_pick_photo_id` (`photo_id`)

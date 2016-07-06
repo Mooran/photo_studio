@@ -1,5 +1,5 @@
 #-*-coding=utf-8-*-
-import os,sys,json,hashlib,time
+import os,sys,json,hashlib,time,datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.template.loader import get_template
@@ -94,6 +94,7 @@ def pick_photo(request):
     product_photo_list = request.POST.get('product_photo_list')
     product_photo_list = json.loads(product_photo_list)
     pick_photo = PhotoPick.objects.filter(unique_id=unique_id)
+    save_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     if pick_photo:
         pick_photo.delete()
     create_obj_list = []
@@ -101,7 +102,7 @@ def pick_photo(request):
     for product_photo in product_photo_list:
         product_id = product_photo.get('product_id')
         for photo_id in product_photo['photo_list']:
-            create_obj_list.append(PhotoPick(unique_id=unique_id,product_id=product_id,photo_id=photo_id))
+            create_obj_list.append(PhotoPick(unique_id=unique_id,product_id=product_id,photo_id=photo_id,last_modify_time=save_time))
     PhotoPick.objects.bulk_create(create_obj_list)
     return '保存成功'
 
@@ -114,6 +115,7 @@ def pick_sample(request):
     modify_note = request.POST.get('lastrequire','')
     sample_list = json.loads(sample_list)
     pick_sample = SamplePick.objects.filter(unique_id=unique_id)
+    save_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     if pick_sample:
         pick_sample.delete()
     create_obj_list = []
@@ -121,7 +123,7 @@ def pick_sample(request):
         photo_id = sample.get('imgid')
         modify = sample.get('status')
         sample_note = sample.get('modify','')
-        create_obj_list.append(SamplePick(unique_id=unique_id,modify=modify,photo_id=photo_id,modify_note=sample_note))
+        create_obj_list.append(SamplePick(unique_id=unique_id,modify=modify,photo_id=photo_id,modify_note=sample_note,last_modify_time=save_time))
     SamplePick.objects.bulk_create(create_obj_list)
     order = Order.objects.get(unique_id=unique_id)
     order.modify_note = modify_note
@@ -165,9 +167,9 @@ def push_order(request):
     existed_order = Order.objects.filter(unique_id=unique_id)
     if existed_order:
         existed_order = existed_order[0]
-        return '/index/photo/%s' % existed_order.access_path if not source else 'index/sample/%s' % existed_order.access_path
+        return '/index/photo/%s' % existed_order.access_path if not source else '/index/sample/%s' % existed_order.access_path
     Order(unique_id=unique_id,order_num=order_num,customer_name=customer_name,customer_phone=customer_phone,studio_name=studio_name,studio_phone=studio_phone,scene_name=scene_name,access_path=access_path).save()
-    return '/index/photo/%s' % access_path if not source else 'index/sample/%s' % access_path
+    return '/index/photo/%s' % access_path if not source else '/index/sample/%s' % access_path
 
 
 @csrf_exempt
@@ -190,14 +192,16 @@ def push_product(request):
         product_id = product.get('product_id','')
         if not product_id:
             raise ValueError,"缺少商品id"
-        name = product.get('name','')
-        if not name:
-            raise ValueError,"缺少商品名称"
-        num = product.get('num',0)
-        if not num:
-            raise ValueError,"缺少商品数量" 
-        unit_price = product.get('unit_price',0)
-        create_obj_list.append(Product(unique_id=unique_id,product_id=product_id,name=name,num=num,unit_price=unit_price))
+        existed_product = Product.objects.filter(unique_id=unique_id,product_id=product_id)
+        if not existed_product:
+            name = product.get('name','')
+            if not name:
+                raise ValueError,"缺少商品名称"
+            num = product.get('num',0)
+            if not num:
+                raise ValueError,"缺少商品数量" 
+            unit_price = product.get('unit_price',0)
+            create_obj_list.append(Product(unique_id=unique_id,product_id=product_id,name=name,num=num,unit_price=unit_price))
 
     Product.objects.bulk_create(create_obj_list)
     return '商品信息上传成功'
@@ -215,7 +219,7 @@ def get_photo_pick(request):
     order_object = order_object[0]
     unique_id = order_object.unique_id
     pick_info_list = PhotoPick.objects.select_related().filter(unique_id=unique_id)
-    result = []
+    result = {'last_modify_time':pick_info_list[0].last_modify_time.strftime('%Y-%m-%d %H:%M:%S') if pick_info_list else '','pick_list':[]}
     product_photo_dict = dict()
     for pick_info in pick_info_list:
         product_id = pick_info.product.product_id
@@ -230,7 +234,7 @@ def get_photo_pick(request):
                      'num':product_photo_dict[product_id]['num'],
                      'photo_list':'|'.join(product_photo_dict[product_id]['photo_list'])
                     }
-        result.append(temp_dict)
+        result['pick_list'].append(temp_dict)
     return result
 
 
@@ -247,12 +251,12 @@ def get_sample_pick(request):
     order_object = order_object[0]
     unique_id = order_object.unique_id
     pick_sample_list = SamplePick.objects.select_related().filter(unique_id=unique_id)
-    result = {'general_require':order_object.modify_note,'sample_list':[]}
+    result = {'general_require':order_object.modify_note or '','sample_list':[],'last_modify_time':pick_sample_list[0].last_modify_time.strftime('%Y-%m-%d %H:%M:%S') if pick_sample_list else ''}
     for pick_sample in pick_sample_list:
         temp_dict = dict()
         photo_name = '%s-%s' % (pick_sample.photo.scene_name,pick_sample.photo.name) if pick_sample.photo.scene_name else pick_sample.photo.name
         temp_dict['photo_name'] = photo_name
         temp_dict['modify'] = pick_sample.modify
-        temp_dict['modify_note'] = pick_sample.modify_note
+        temp_dict['modify_note'] = pick_sample.modify_note or ''
         result['sample_list'].append(temp_dict)
     return result
