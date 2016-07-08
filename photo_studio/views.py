@@ -219,7 +219,7 @@ def get_photo_pick(request):
     order_object = order_object[0]
     unique_id = order_object.unique_id
     pick_info_list = PhotoPick.objects.select_related().filter(unique_id=unique_id)
-    result = {'last_modify_time':pick_info_list[0].last_modify_time.strftime('%Y-%m-%d %H:%M:%S') if pick_info_list else '','pick_list':[]}
+    result = {'last_modify_time':pick_info_list[0].last_modify_time.strftime('%Y-%m-%d %H:%M:%S') if pick_info_list and pick_info_list[0].last_modify_time else '','pick_list':[]}
     product_photo_dict = dict()
     for pick_info in pick_info_list:
         product_id = pick_info.product.product_id
@@ -251,7 +251,7 @@ def get_sample_pick(request):
     order_object = order_object[0]
     unique_id = order_object.unique_id
     pick_sample_list = SamplePick.objects.select_related().filter(unique_id=unique_id)
-    result = {'general_require':order_object.modify_note or '','sample_list':[],'last_modify_time':pick_sample_list[0].last_modify_time.strftime('%Y-%m-%d %H:%M:%S') if pick_sample_list else ''}
+    result = {'general_require':order_object.modify_note or '','sample_list':[],'last_modify_time':pick_sample_list[0].last_modify_time.strftime('%Y-%m-%d %H:%M:%S') if pick_sample_list and pick_sample_list[0].last_modify_time else ''}
     for pick_sample in pick_sample_list:
         temp_dict = dict()
         photo_name = '%s-%s' % (pick_sample.photo.scene_name,pick_sample.photo.name) if pick_sample.photo.scene_name else pick_sample.photo.name
